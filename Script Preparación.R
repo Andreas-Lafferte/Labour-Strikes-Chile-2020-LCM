@@ -5,7 +5,6 @@ pacman::p_load(dplyr,
                ggplot2,
                magrittr,
                tidyverse, 
-               ggplot2,
                lubridate,
                ggpubr, 
                sjmisc,
@@ -59,7 +58,35 @@ ohl %>% subset(is.na(ciuur2)) %>% select(yr,ciuur2,ciuur3,ciuur4,sector)
 
 # Pasos a seguir: 
 # 1. Seleccionar las variables de la base procesada
-# 2. Reducir la base al año 2018 
+ohl$num <- as.numeric(row.names(ohl))
+options(scipen=999) # valores sin notación científica
+
+proc_ohl <- ohl%>%select(organizacion = org, 
+                            legalidad= leg, 
+                            ano= yr, 
+                            motivos= dem1, 
+                            ddpp =ddpp,
+                            sector = sector,
+                            tot_trabajadores = trabemp,
+                            rango_empresa = rangoemp,
+                            trab_comprometidos = tc,
+                            tactica = tactica1,
+                            aliado = aliado1,
+                            central = central1,
+                            dptp = dhtp,
+                            number = num)
+
+# Comprobar
+names(proc_ohl)
+
+# 2. Reducir la base al año 2017 y 2018 
+proc_ohl$ano = as_numeric(proc_ohl$ano)
+class(proc_ohl$ano)
+
+proc_ohl$ano[proc_ohl$ano < 2017] <- NA
+proc_ohl <- proc_ohl[!is.na(proc_ohl$ano),]
+view(proc_ohl)
+
 # 3. Recodificar, renombrar y etiquetar las variables a utilizar 
 # 4. Evaluar NA's 
 # 5. Descriptivos de variables de interés y tablas de contingencia 
