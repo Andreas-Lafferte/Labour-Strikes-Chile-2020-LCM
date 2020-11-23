@@ -1,3 +1,5 @@
+## 00: Script preparacion
+
 # ---- 1. Librerias y datos ----
 pacman::p_load(dplyr, 
                car, 
@@ -74,7 +76,8 @@ proc_ohl <- ohl%>%select(organizacion = org,
                             aliado = aliado1,
                             central = central1,
                             dptp = dhtp,
-                            number = num)
+                            number = num, 
+                         autoridad = autoridad)
 
 # Comprobar
 names(proc_ohl)
