@@ -13,7 +13,7 @@ pacman::p_load(dplyr,
                sjlabelled, 
                stargazer)
 library(openxlsx)
-ohl<-readWorkbook("C:/Users/USUARIO/Desktop/8vo semestre/Taller de Investigación del Trabajo/Labor_Strikes_Dataset_1979_2018_Public.xlsx", detectDates=TRUE)
+ohl<-readWorkbook("C:/Users/USUARIO/Desktop/8vo semestre/Taller de Investigación del Trabajo/Labour-Strikes-Chile-2020-LCM/Labor_Strikes_Dataset_1979_2018_Public.xlsx", detectDates=TRUE)
 
 # ---- 2. Procesamiento ---- 
 ohl$ciuur2<-as.factor(ohl$ciuur2)
@@ -82,11 +82,11 @@ proc_ohl <- ohl%>%select(organizacion = org,
 # Comprobar
 names(proc_ohl)
 
-# 2. Reducir la base al año 2017 y 2018 
+# 2. Reducir la base al año 2016, 2017 y 2018 
 proc_ohl$ano = as_numeric(proc_ohl$ano)
 class(proc_ohl$ano)
 
-proc_ohl$ano[proc_ohl$ano < 2017] <- NA
+proc_ohl$ano[proc_ohl$ano < 2016] <- NA
 proc_ohl <- proc_ohl[!is.na(proc_ohl$ano),]
 view(proc_ohl)
 
