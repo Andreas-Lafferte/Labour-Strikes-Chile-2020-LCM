@@ -13,7 +13,7 @@ pacman::p_load(dplyr,
                sjlabelled, 
                stargazer)
 library(openxlsx)
-ohl<-readWorkbook("Labor_Strikes_Dataset_1979_2018_Public.xlsx", detectDates=TRUE)
+ohl<-readWorkbook("input/Labor_Strikes_Dataset_1979_2018_Public.xlsx", detectDates=TRUE)
 
 # ---- 2. Procesamiento ---- 
 ohl$ciuur2<-as.factor(ohl$ciuur2)

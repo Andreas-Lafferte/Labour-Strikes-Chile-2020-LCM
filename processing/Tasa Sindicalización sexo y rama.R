@@ -26,15 +26,15 @@ library(writexl)
 
 ## 1990 a 2001
 cuadro4_1<-cbind(
-  read.xlsx("1. OOSS.xlsx",sheet = 10,rows=c(1:12),cols=c(1:7),na.strings = "**"),
-  read.xlsx("1. OOSS.xlsx",sheet = 11,rows=c(2:13),cols=c(2:7),na.strings = "**")
+  read.xlsx("input/1. OOSS.xlsx",sheet = 10,rows=c(1:12),cols=c(1:7),na.strings = "**"),
+  read.xlsx("input/1. OOSS.xlsx",sheet = 11,rows=c(2:13),cols=c(2:7),na.strings = "**")
 )
 
 ## 2002 a 2010
 
-d<-read.xlsx("1. OOSS.xlsx",sheet = 12,rows=c(4:14),cols=c(1:10),na.strings = "**",colNames = FALSE)
-e<-read.xlsx("1. OOSS.xlsx",sheet = 13,rows=c(3:13),cols=c(2:10),na.strings = "**",colNames = FALSE)
-f<-read.xlsx("1. OOSS.xlsx",sheet = 14,rows=c(3:13),cols=c(2:10),na.strings = "**",colNames = FALSE)
+d<-read.xlsx("input/1. OOSS.xlsx",sheet = 12,rows=c(4:14),cols=c(1:10),na.strings = "**",colNames = FALSE)
+e<-read.xlsx("input/1. OOSS.xlsx",sheet = 13,rows=c(3:13),cols=c(2:10),na.strings = "**",colNames = FALSE)
+f<-read.xlsx("input/1. OOSS.xlsx",sheet = 14,rows=c(3:13),cols=c(2:10),na.strings = "**",colNames = FALSE)
 names(d)<-c("Rama.Actividad.Económica","h2","m2","t2","h3","m3","t3","h4","m4","t4")
 names(e)<-c("h5","m5","t5","h6","m6","t6","h7","m7","t7")
 names(f)<-c("h8","m8","t8","h9","m9","t9","h10","m10","t10")
@@ -44,10 +44,10 @@ cuadro4_2<-cuadro4_2_sexo %>% select(1,4,7,10,13,16,19,22,25,28)
 
 ## 2011 a 2017
 cuadro4_3_sexo<-cbind(
-  read.xlsx("1. OOSS.xlsx",sheet = 15,rows=c(4:22),cols=c(1:7),na.strings = "**",colNames = FALSE),
-  read.xlsx("1. OOSS.xlsx",sheet = 16,rows=c(4:22),cols=c(2:7),na.strings = "**",colNames = FALSE),
-  read.xlsx("1. OOSS.xlsx",sheet = 17,rows=c(4:22),cols=c(2:7),na.strings = "**",colNames = FALSE),
-  read.xlsx("1. OOSS.xlsx",sheet = 18,rows=c(4:22),cols=c(2:4),na.strings = "**",colNames = FALSE)
+  read.xlsx("input/1. OOSS.xlsx",sheet = 15,rows=c(4:22),cols=c(1:7),na.strings = "**",colNames = FALSE),
+  read.xlsx("input/1. OOSS.xlsx",sheet = 16,rows=c(4:22),cols=c(2:7),na.strings = "**",colNames = FALSE),
+  read.xlsx("input/1. OOSS.xlsx",sheet = 17,rows=c(4:22),cols=c(2:7),na.strings = "**",colNames = FALSE),
+  read.xlsx("input/1. OOSS.xlsx",sheet = 18,rows=c(4:22),cols=c(2:4),na.strings = "**",colNames = FALSE)
 )
 
 names(cuadro4_3_sexo)<-c("Rama.Actividad.Económica","h11","m11","t11","h12","m12","t12","h13","m13","t13","h14","m14","t14",
@@ -57,7 +57,7 @@ cuadro4_3<-cuadro4_3_sexo %>% select(1,4,7,10,13,16,19,22)
 
 
 ## 2018
-cuadro4_4_sexo<-read.xlsx("1. OOSS.xlsx",sheet = 19,rows=c(3:26),cols=c(1:4),na.strings = "**")
+cuadro4_4_sexo<-read.xlsx("input/1. OOSS.xlsx",sheet = 19,rows=c(3:26),cols=c(1:4),na.strings = "**")
 names(cuadro4_4_sexo)<-c("Rama.Actividad.Económica","h18","m18","t18")
 cuadro4_4<-cuadro4_4_sexo %>% select(1,4)
 
@@ -603,10 +603,10 @@ cuadro5_hombres<-cuadro5_hombres %>% mutate(sexo="hombres")
 cuadro5_mujeres<-cuadro5_mujeres %>% mutate(sexo="mujeres")
 cuadro5<-rbind(cuadro5_hombres,cuadro5_mujeres)
 
-write_xlsx(cuadro5,"cuadro5.xlsx", col_names = TRUE,format_headers = TRUE)
+write_xlsx(cuadro5,"output/cuadro5.xlsx", col_names = TRUE,format_headers = TRUE)
 
 #2. Cargar datos INE (censo 2017) ------------
-pob_ocup_rama<-read.xlsx("Copia de serie-ocupados-según-rama-de-actividad-económica-ciiu-rev4.cl.xlsx",
+pob_ocup_rama<-read.xlsx("input/Copia de serie-ocupados-según-rama-de-actividad-económica-ciiu-rev4.cl.xlsx",
                              sheet = 2,startRow = 7)
 
 #3. Recodificar base y nombres cuadro 6 (ocupados totales) --------------------
@@ -674,7 +674,7 @@ names(cuadro6)<-c("Rama.Actividad.Económica","ocup_2016","ocup_2017","ocup_2018
 #6. Cuadros por sexo ---------------
 #6.1 Hombres ------------
 
-homb_ocup_rama <-read.xlsx("Copia de serie-ocupados-según-rama-de-actividad-económica-ciiu-rev4.cl.xlsx",
+homb_ocup_rama <-read.xlsx("input/Copia de serie-ocupados-según-rama-de-actividad-económica-ciiu-rev4.cl.xlsx",
                            sheet = 3,startRow = 7)
 
 nombres<-names(homb_ocup_rama)
@@ -739,7 +739,7 @@ names(cuadro6_homb)<-c("Rama.Actividad.Económica","homb_ocup_2016","homb_ocup_2
 
 #6.2 Mujeres ------------
 
-muj_ocup_rama <-read.xlsx("Copia de serie-ocupados-según-rama-de-actividad-económica-ciiu-rev4.cl.xlsx",
+muj_ocup_rama <-read.xlsx("input/Copia de serie-ocupados-según-rama-de-actividad-económica-ciiu-rev4.cl.xlsx",
                            sheet = 4,startRow = 7)
 
 nombres<-names(muj_ocup_rama)
@@ -828,12 +828,12 @@ cuadro_tasa_sex$ocup_2018 <- as.numeric(cuadro_tasa_sex$ocup_2018)
 cuadro_tasa_sex <- as.data.frame(cuadro_tasa_sex)
 
 
-write_xlsx(cuadro_tasa_sex,"cuadro_tasa_sex.xlsx", col_names = TRUE,format_headers = TRUE)
-write_xlsx(cuadro_tasa_sex_hombres,"cuadro_tasa_sex_hombres.xlsx", col_names = TRUE,format_headers = TRUE)
-write_xlsx(cuadro_tasa_sex_mujeres,"cuadro_tasa_sex_mujeres.xlsx", col_names = TRUE,format_headers = TRUE)
+write_xlsx(cuadro_tasa_sex,"output/cuadro_tasa_sex.xlsx", col_names = TRUE,format_headers = TRUE)
+write_xlsx(cuadro_tasa_sex_hombres,"output/cuadro_tasa_sex_hombres.xlsx", col_names = TRUE,format_headers = TRUE)
+write_xlsx(cuadro_tasa_sex_mujeres,"output/cuadro_tasa_sex_mujeres.xlsx", col_names = TRUE,format_headers = TRUE)
 
 library(readxl)
-tasa_sindi_sex <- read_excel("cuadro_tasa_sex2.xlsx") #se carga desde comuptador local puesto que se edita en excel
+tasa_sindi_sex <- read_excel("input/cuadro_tasa_sex2.xlsx") #se carga desde comuptador local puesto que se edita en excel
 View(tasa_sindi_sex)
 
 tasa_sindi_sex <- tasa_sindi_sex %>% mutate(ocup_2016=as.numeric(ocup_2016),
@@ -843,4 +843,4 @@ tasa_sindi_sex <- tasa_sindi_sex %>% mutate(ocup_2016=as.numeric(ocup_2016),
                                             tasa_sind_2017=afi_2017*100/ocup_2017,
                                             tasa_sind_2018=afi_2018*100/ocup_2018)%>% as.data.frame()
 
-write_xlsx(tasa_sindi_sex,"tasa_sindi_sex.xlsx", col_names = TRUE,format_headers = TRUE)
+write_xlsx(tasa_sindi_sex,"output/tasa_sindi_sex.xlsx", col_names = TRUE,format_headers = TRUE)
