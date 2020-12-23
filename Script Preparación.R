@@ -13,7 +13,7 @@ pacman::p_load(dplyr,
                sjlabelled, 
                stargazer)
 library(openxlsx)
-ohl<-readWorkbook("C:/Users/USUARIO/Desktop/8vo semestre/Taller de Investigación del Trabajo/Labour-Strikes-Chile-2020-LCM/Labor_Strikes_Dataset_1979_2018_Public.xlsx", detectDates=TRUE)
+ohl<-readWorkbook("Labor_Strikes_Dataset_1979_2018_Public.xlsx", detectDates=TRUE)
 
 # ---- 2. Procesamiento ---- 
 ohl$ciuur2<-as.factor(ohl$ciuur2)
@@ -31,7 +31,7 @@ ohl<-ohl %>% mutate(sector=case_when(ciuur2==1 ~ "A Agriculture",
                                      ciuur2==9 ~  "O Central, Regional and Municipal Government",
                                      ciuur2==10 ~ "P Education (private, public and municipalized)",
                                      ciuur2==11 ~ "Q Health (private, public and municipalized)",
-                                     ciuur2==12 ~ "Q Social and Personal Services",
+                                     ciuur2==12 ~ "Q Other Community, Social and Personal Services",
                                      ciuur2==13 ~ "Unknown or Other Activities",
                                      ciuur2==14 ~ "National Strikes",
                                      is.na(ciuur2)&ciuur4==1 ~ "A Agriculture",
@@ -46,13 +46,13 @@ ohl<-ohl %>% mutate(sector=case_when(ciuur2==1 ~ "A Agriculture",
                                      is.na(ciuur2)&ciuur4==10 ~ "H-J Transportation and Communication",
                                      is.na(ciuur2)&ciuur4==11 ~ "L-K Banks and Financial Services",
                                      is.na(ciuur2)&ciuur4==12 ~ "L-K Banks and Financial Services",
-                                     is.na(ciuur2)&ciuur4==13 ~ "M Professional, scientific and technical activities",
-                                     is.na(ciuur2)&ciuur4==14 ~ "N Activities of administrative and support services",
+                                     is.na(ciuur2)&ciuur4==13 ~ "Q Other Community, Social and Personal Services",
+                                     is.na(ciuur2)&ciuur4==14 ~ "Q Other Community, Social and Personal Services",
                                      is.na(ciuur2)&ciuur4==15 ~ "O Central, Regional and Municipal Government",
                                      is.na(ciuur2)&ciuur4==16 ~ "P Education (private, public and municipalized)",
                                      is.na(ciuur2)&ciuur4==17 ~ "Q Health (private, public and municipalized)",
-                                     is.na(ciuur2)&ciuur4==18 ~ "R Artistic, entertainment and recreational activities",
-                                     is.na(ciuur2)&ciuur4==19 ~ "Unknown or Other Activities",
+                                     is.na(ciuur2)&ciuur4==18 ~ "Q Other Community, Social and Personal Services",
+                                     is.na(ciuur2)&ciuur4==19 ~ "Q Other Community, Social and Personal Services",
                                      is.na(ciuur2)&ciuur4==20 ~ "Unknown or Other Activities",
                                      is.na(ciuur2)&ciuur4==21 ~ "Unknown or Other Activities"))
 
