@@ -1,4 +1,4 @@
-## 00: Generacion de cuadro tasa de sindicalizacion por sexo y rama 2016-2018
+## 01: Generacion de cuadro tasa de sindicalizacion por sexo y rama 2016-2018
 ## Andreas Lafferte 
 
 #1. Paquetes ---- 
@@ -564,11 +564,11 @@ cuadro5<-rbind(cuadro5_hombres,cuadro5_mujeres)
 
 write_xlsx(cuadro5,"output/cuadro5.xlsx", col_names = TRUE,format_headers = TRUE)
 
-#2. Cargar datos INE (censo 2017) ------------
+#3. Cargar datos INE (censo 2017) ------------
 pob_ocup_rama<-read.xlsx("input/Copia de serie-ocupados-según-rama-de-actividad-económica-ciiu-rev4.cl.xlsx",
                              sheet = 2,startRow = 7)
 
-#3. Recodificar base y nombres cuadro 6 (ocupados totales) --------------------
+#4. Recodificar base y nombres cuadro 6 (ocupados totales) --------------------
 nombres<-names(pob_ocup_rama)
 
 pob_ocup_rama <-pob_ocup_rama[1:(nrow(pob_ocup_rama)-3), c(1,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48)]
@@ -581,7 +581,7 @@ names(pob_ocup_rama)<-c("ano","trimestre","total_ocup","A_Agriculture","B_Mining
                          "N_Admnistrative","O_Public_Adm","P_Education", "Q_Health", "R_Arts", "S_Other_Service", "T_Houseohlds", "U_Extraterritorial", "None")
 
 
-#4. Filter and mutate ---------- 
+#5. Filter and mutate ---------- 
 a <- pob_ocup_rama %>% filter(trimestre=="Oct - Dic" & ano>=2016&ano<2019)%>% select(ano, total_ocup, A_Agriculture, B_Mining,
                                                                                      C_Manufacturing_industry, D_Electricity_gas,
                                                                                      E_Water, F_Construction, G_Commerce, H_Transport,
@@ -609,7 +609,7 @@ cuadro_a <- a %>% group_by(ano) %>%
 
 cuadro_a <- cuadro_a[-c(6,7,9,10,11,12,13,14,15,16,17,20,21,22,23,24)]
 
-#5.Crear cuadro 6 ------------
+#6.Crear cuadro 6 ------------
 
 cuadro6 <- rbind(
   c("A Agriculture", 7224282, 7248103, 7215891),
@@ -631,8 +631,8 @@ cuadro6 <- rbind(
 names(cuadro6)<-c("Rama.Actividad.Económica","ocup_2016","ocup_2017","ocup_2018")
 write_xlsx(cuadro6,"output/cuadro6.xlsx", col_names = TRUE,format_headers = TRUE)
 
-#6. Cuadros por sexo ---------------
-#6.1 Hombres ------------
+#7. Cuadros por sexo ---------------
+#7.1 Hombres ------------
 
 homb_ocup_rama <-read.xlsx("input/Copia de serie-ocupados-según-rama-de-actividad-económica-ciiu-rev4.cl.xlsx",
                            sheet = 3,startRow = 7)
@@ -697,7 +697,7 @@ cuadro6_homb <- rbind(
 
 names(cuadro6_homb)<-c("Rama.Actividad.Económica","homb_ocup_2016","homb_ocup_2017","homb_ocup_2018")
 
-#6.2 Mujeres ------------
+#7.2 Mujeres ------------
 
 muj_ocup_rama <-read.xlsx("input/Copia de serie-ocupados-según-rama-de-actividad-económica-ciiu-rev4.cl.xlsx",
                            sheet = 4,startRow = 7)
@@ -761,7 +761,7 @@ cuadro6_muj <- rbind(
 
 names(cuadro6_muj)<-c("Rama.Actividad.Económica","muj_ocup_2016","muj_ocup_2017","muj_ocup_2018")
 
-# 7. Unir cuadros ---------------- 
+# 8. Unir cuadros ---------------- 
 
 # cuadros sexo 
 
