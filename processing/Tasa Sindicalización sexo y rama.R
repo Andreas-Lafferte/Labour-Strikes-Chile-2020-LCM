@@ -22,7 +22,7 @@ library(ggrepel)
 library(tibble)
 library(writexl)
 
-#### Cuadro 4. y 5. Cantidad de afiliados ####
+#2. Cuadros 4. y 5. Cantidad de afiliados y afiliados por sexo y rama ------------
 
 ## 1990 a 2001
 cuadro4_1<-cbind(
@@ -228,17 +228,11 @@ cuadro4_4<-cuadro4_4 %>% add_row(Rama.Actividad.Económica="A Agriculture",
   add_row(Rama.Actividad.Económica="Unknown or Other Activities",
           `2018`=sum(.$`2018`[20]+.$`2018`[21]+.$`2018`[22]))
 
-#cuadro4<-merge(cuadro4_1,cuadro4_2,by="Rama.Actividad.EconÃ³mica")
-
 cuadro4_3 <- cuadro4_3[-c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18),]
 cuadro4_4 <- cuadro4_4[-c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22),]
 
 cuadro4<-merge(cuadro4_3,cuadro4_4,by="Rama.Actividad.Económica",all.x = TRUE)
-
-#cuadro4<-merge(cuadro4,cuadro4_4,by="Rama.Actividad.EconÃ³mica",all.x = TRUE)
-
 cuadro4<-unique( cuadro4 )
-#cuadro4<-cuadro4[-3,]
 
 ## B. Con sexo (cuadro 5) (solo desde 2002)
 
@@ -415,10 +409,10 @@ cuadro4_6 <- cuadro4_6[-c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18),]
 cuadro4_7 <- cuadro4_7[-c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22),]
 
 cuadro5_hombres<-merge(cuadro4_6,cuadro4_7,by="Rama.Actividad.Económica",all.x = TRUE)
-#cuadro5_hombres<-merge(cuadro5_hombres,cuadro4_4,by="Rama.Actividad.EconÃ³mica",all.x = TRUE)
+
 
 cuadro5_hombres<-unique( cuadro5_hombres )
-#cuadro5_hombres<-cuadro5_hombres[-3,]
+
 
 
 # mujeres
@@ -592,10 +586,8 @@ cuadro4_9 <- cuadro4_9[-c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18),]
 cuadro4_10 <- cuadro4_10[-c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22),]
 
 cuadro5_mujeres<-merge(cuadro4_9,cuadro4_10,by="Rama.Actividad.Económica",all.x = TRUE)
-#cuadro5_mujeres<-merge(cuadro5_mujeres,cuadro4_4,by="Rama.Actividad.EconÃ³mica",all.x = TRUE)
 
 cuadro5_mujeres<-unique( cuadro5_mujeres )
-#cuadro5_mujeres<-cuadro5_mujeres[-3,]
 
 ## combinar y crear cuadro 5
 
@@ -653,23 +645,24 @@ cuadro_a <- cuadro_a[-c(6,7,9,10,11,12,13,14,15,16,17,20,21,22,23,24)]
 #5.Crear cuadro 6 ------------
 
 cuadro6 <- rbind(
-  c("A Agriculture", 722.4282, 724.8103, 721.5891),
-  c("B Mining", 203.6867, 205.9247, 216.4950),
-  c("C Manufacturing industry", 901.3723, 942.1697, 887.6124),
-  c("D-E Electricity, Water and Sanitary Services", 95.29307, 98.76027, 93.68633),
-  c("F Construction", 713.6906, 711.0358, 769.4652), 
-  c("G-I Commerce", 2050.093, 2048.900, 2123.043),
-  c("H-J Transportation and Communication", 707.1425, 742.9791, 774.5569),
-  c("L-K Banks and Financial Services", 234.0996, 259.3169, 252.0655),
-  c("O Central, Regional and Municipal Government", 460.9567, 483.1438, 491.4204),
-  c("P Education (private, public and municipalized)", 725.4361, 777.7899, 787.2497),
-  c("Q Health (private, public and municipalized)", 452.0837, 469.8346, 521.0453),
-  c("Q Other Community, Social and Personal Services", 850.8740, 929.5964, 916.7496),
-  c("Unknown or Other Activities", 383.5538, 374.4051, 359.2706),
-  c("Total", 8500.710, 8768.667, 8914.248))%>% as.data.frame()
+  c("A Agriculture", 7224282, 7248103, 7215891),
+  c("B Mining", 2036867, 2059247, 2164950),
+  c("C Manufacturing industry", 9013723, 9421697, 8876124),
+  c("D-E Electricity, Water and Sanitary Services", 9529307, 9876027, 9368633),
+  c("F Construction", 7136906, 7110358, 7694652), 
+  c("G-I Commerce", 2050093, 2048900, 2123043),
+  c("H-J Transportation and Communication", 7071425, 7429791, 7745569),
+  c("L-K Banks and Financial Services", 2340996, 2593169, 2520655),
+  c("O Central, Regional and Municipal Government", 4609567, 4831438, 4914204),
+  c("P Education (private, public and municipalized)", 7254361, 7777899, 7872497),
+  c("Q Health (private, public and municipalized)", 4520837, 4698346, 5210453),
+  c("Q Other Community, Social and Personal Services", 8508740, 9295964, 9167496),
+  c("Unknown or Other Activities", 3835538, 3744051, 3592706),
+  c("Total", 8500710, 8768667, 8914248))%>% as.data.frame()
 
 
 names(cuadro6)<-c("Rama.Actividad.Económica","ocup_2016","ocup_2017","ocup_2018")
+write_xlsx(cuadro6,"output/cuadro6.xlsx", col_names = TRUE,format_headers = TRUE)
 
 #6. Cuadros por sexo ---------------
 #6.1 Hombres ------------
@@ -719,20 +712,20 @@ cuadro_b <- cuadro_b[-c(6,7,9,10,11,12,13,14,15,16,17,20,21,22,23,24)]
 # Cuadro 6 para sexo hombres
 
 cuadro6_homb <- rbind(
-  c("A Agriculture", 536.2180, 542.4714, 539.6693),
-  c("B Mining", 185.9390, 187.9241, 190.3159),
-  c("C Manufacturing industry", 598.0049, 631.1619, 614.0183),
-  c("D-E Electricity, Water and Sanitary Services", 76.40419, 84.06328, 79.06487),
-  c("F Construction", 669.6761, 662.9351, 720.3188), 
-  c("G-I Commerce", 1059.144, 1059.251, 1065.295),
-  c("H-J Transportation and Communication", 577.7433, 613.0182, 616.6072),
-  c("L-K Banks and Financial Services", 115.4385, 136.1086, 124.4531),
-  c("O Central, Regional and Municipal Government", 281.9876, 280.9498, 293.1033),
-  c("P Education (private, public and municipalized)", 226.3161, 227.5072, 232.6717),
-  c("Q Health (private, public and municipalized)", 116.8076, 123.7488, 134.1476),
-  c("Q Other Community, Social and Personal Services", 458.3188, 477.3333, 500.0691),
-  c("Unknown or Other Activities", 30.16408, 31.35151, 26.56438),
-  c("Total", 4932.162, 5057.824, 5136.299))%>% as.data.frame()
+  c("A Agriculture", 5362180, 5424714, 5396693),
+  c("B Mining", 1859390, 1879241, 1903159),
+  c("C Manufacturing industry", 5980049, 6311619, 6140183),
+  c("D-E Electricity, Water and Sanitary Services", 7640419, 8406328, 7906487),
+  c("F Construction", 6696761, 6629351, 7203188), 
+  c("G-I Commerce", 1059144, 1059251, 1065295),
+  c("H-J Transportation and Communication", 5777433, 6130182, 6166072),
+  c("L-K Banks and Financial Services", 1154385, 1361086, 1244531),
+  c("O Central, Regional and Municipal Government", 2819876, 2809498, 2931033),
+  c("P Education (private, public and municipalized)", 2263161, 2275072, 2326717),
+  c("Q Health (private, public and municipalized)", 1168076, 1237488, 1341476),
+  c("Q Other Community, Social and Personal Services", 4583188, 4773333, 5000691),
+  c("Unknown or Other Activities", 3016408, 3135151, 2656438),
+  c("Total", 4932162, 5057824, 5136299))%>% as.data.frame()
 
 
 names(cuadro6_homb)<-c("Rama.Actividad.Económica","homb_ocup_2016","homb_ocup_2017","homb_ocup_2018")
@@ -783,20 +776,20 @@ cuadro_c <- cuadro_c[-c(6,7,9,10,11,12,13,14,15,16,17,20,21,22,23,24)]
 # Cuadro 6 para sexo mujeres
 
 cuadro6_muj <- rbind(
-  c("A Agriculture", 186.2102, 182.3389, 181.9198),
-  c("B Mining", 17.74763, 18.00063, 26.17903),
-  c("C Manufacturing industry", 303.3675, 311.0078, 273.5942),
-  c("D-E Electricity, Water and Sanitary Services", 18.88887, 14.69699, 14.62146),
-  c("F Construction", 44.01451, 48.10071, 49.14644), 
-  c("G-I Commerce", 990.9487, 989.6494, 1057.7473),
-  c("H-J Transportation and Communication", 129.3992, 129.9608, 157.9498),
-  c("L-K Banks and Financial Services", 118.6610, 123.2084, 127.6124),
-  c("O Central, Regional and Municipal Government", 178.9691, 202.1940, 198.3171),
-  c("P Education (private, public and municipalized)", 499.1200, 550.2827, 554.5780),
-  c("Q Health (private, public and municipalized)", 335.2761, 346.0858, 386.8977),
-  c("Q Other Community, Social and Personal Services", 392.5552, 452.2631, 416.6805),
-  c("Unknown or Other Activities", 353.3897, 343.0536, 332.7062),
-  c("Total", 3568.548, 3710.843, 3777.950))%>% as.data.frame()
+  c("A Agriculture", 1862102, 1823389, 1819198),
+  c("B Mining", 1774763, 1800063, 2617903),
+  c("C Manufacturing industry", 3033675, 3110078, 2735942),
+  c("D-E Electricity, Water and Sanitary Services", 1888887, 1469699, 1462146),
+  c("F Construction", 4401451, 4810071, 4914644), 
+  c("G-I Commerce", 9909487, 9896494, 10577473),
+  c("H-J Transportation and Communication", 1293992, 1299608, 1579498),
+  c("L-K Banks and Financial Services", 1186610, 1232084, 1276124),
+  c("O Central, Regional and Municipal Government", 1789691, 2021940, 1983171),
+  c("P Education (private, public and municipalized)", 4991200, 5502827, 5545780),
+  c("Q Health (private, public and municipalized)", 3352761, 3460858, 3868977),
+  c("Q Other Community, Social and Personal Services", 3925552, 4522631, 4166805),
+  c("Unknown or Other Activities", 3533897, 3430536, 3327062),
+  c("Total", 3568548, 3710843, 3777950))%>% as.data.frame()
 
 
 names(cuadro6_muj)<-c("Rama.Actividad.Económica","muj_ocup_2016","muj_ocup_2017","muj_ocup_2018")
