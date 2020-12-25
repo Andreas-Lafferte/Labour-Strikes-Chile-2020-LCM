@@ -213,11 +213,8 @@ cuadro4<-unique( cuadro4 )
 ## B. Con sexo (cuadro 5) (solo desde 2002)
 
 # hombres
-cuadro4_5<-cuadro4_2_sexo %>% select(1,4-2,7-2,10-2,13-2,16-2,19-2,22-2,25-2,28-2)
 cuadro4_6<-cuadro4_3_sexo %>% select(1,4-2,7-2,10-2,13-2,16-2,19-2,22-2)
 cuadro4_7<-cuadro4_4_sexo %>% select(1,4-2)
-
-colnames(cuadro4_5)<-c("Rama.Actividad.Económica",2002,2003,2004,2005,2006,2007,2008,2009,2010)
 
 colnames(cuadro4_6)<-c("Rama.Actividad.Económica",2011,2012,2013,2014,2015,2016,2017)
 
@@ -386,17 +383,11 @@ cuadro4_7 <- cuadro4_7[-c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,
 
 cuadro5_hombres<-merge(cuadro4_6,cuadro4_7,by="Rama.Actividad.Económica",all.x = TRUE)
 
-
 cuadro5_hombres<-unique( cuadro5_hombres )
 
-
-
 # mujeres
-cuadro4_8<-cuadro4_2_sexo %>% select(1,4-1,7-1,10-1,13-1,16-1,19-1,22-1,25-1,28-1)
 cuadro4_9<-cuadro4_3_sexo %>% select(1,4-1,7-1,10-1,13-1,16-1,19-1,22-1)
 cuadro4_10<-cuadro4_4_sexo %>% select(1,4-1)
-
-colnames(cuadro4_8)<-c("Rama.Actividad.Económica",2002,2003,2004,2005,2006,2007,2008,2009,2010)
 
 colnames(cuadro4_9)<-c("Rama.Actividad.Económica",2011,2012,2013,2014,2015,2016,2017)
 
