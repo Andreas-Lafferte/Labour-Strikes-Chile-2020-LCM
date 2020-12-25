@@ -1,6 +1,5 @@
-## Generacion de cuadro tasa de sindicalizacion por sexo y rama 2016-2018
+## 00: Generacion de cuadro tasa de sindicalizacion por sexo y rama 2016-2018
 ## Andreas Lafferte 
-
 
 #1. Paquetes ---- 
 pacman::p_load(dplyr, 
@@ -24,24 +23,6 @@ library(writexl)
 
 #2. Cuadros 4. y 5. Cantidad de afiliados y afiliados por sexo y rama ------------
 
-## 1990 a 2001
-cuadro4_1<-cbind(
-  read.xlsx("input/1. OOSS.xlsx",sheet = 10,rows=c(1:12),cols=c(1:7),na.strings = "**"),
-  read.xlsx("input/1. OOSS.xlsx",sheet = 11,rows=c(2:13),cols=c(2:7),na.strings = "**")
-)
-
-## 2002 a 2010
-
-d<-read.xlsx("input/1. OOSS.xlsx",sheet = 12,rows=c(4:14),cols=c(1:10),na.strings = "**",colNames = FALSE)
-e<-read.xlsx("input/1. OOSS.xlsx",sheet = 13,rows=c(3:13),cols=c(2:10),na.strings = "**",colNames = FALSE)
-f<-read.xlsx("input/1. OOSS.xlsx",sheet = 14,rows=c(3:13),cols=c(2:10),na.strings = "**",colNames = FALSE)
-names(d)<-c("Rama.Actividad.Económica","h2","m2","t2","h3","m3","t3","h4","m4","t4")
-names(e)<-c("h5","m5","t5","h6","m6","t6","h7","m7","t7")
-names(f)<-c("h8","m8","t8","h9","m9","t9","h10","m10","t10")
-cuadro4_2_sexo<-cbind(d,e,f)
-
-cuadro4_2<-cuadro4_2_sexo %>% select(1,4,7,10,13,16,19,22,25,28)
-
 ## 2011 a 2017
 cuadro4_3_sexo<-cbind(
   read.xlsx("input/1. OOSS.xlsx",sheet = 15,rows=c(4:22),cols=c(1:7),na.strings = "**",colNames = FALSE),
@@ -62,11 +43,6 @@ names(cuadro4_4_sexo)<-c("Rama.Actividad.Económica","h18","m18","t18")
 cuadro4_4<-cuadro4_4_sexo %>% select(1,4)
 
 ## A. Primero sin sexo
-
-cuadro4_1
-cuadro4_2
-colnames(cuadro4_2)<-c("Rama.Actividad.Económica",2002,2003,2004,2005,2006,2007,2008,2009,2010)
-
 colnames(cuadro4_3)<-c("Rama.Actividad.Económica",2011,2012,2013,2014,2015,2016,2017)
 
 cuadro4_3<-cuadro4_3 %>% add_row(Rama.Actividad.Económica="A Agriculture",
