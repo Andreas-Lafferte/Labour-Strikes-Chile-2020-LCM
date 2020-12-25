@@ -525,7 +525,7 @@ cuadro4_10<-cuadro4_10 %>% add_row(Rama.Actividad.Económica="A Agriculture",
   add_row(Rama.Actividad.Económica="F Construction",
           `2018`=sum(.$`2018`[6])) %>%
   
-  add_row(Rama.Actividad.Econ?mica="G-I Commerce",
+  add_row(Rama.Actividad.Económica="G-I Commerce",
           `2018`=sum(.$`2018`[7]+.$`2018`[9])) %>%
   
   add_row(Rama.Actividad.Económica="H-J Transportation and Communication",
