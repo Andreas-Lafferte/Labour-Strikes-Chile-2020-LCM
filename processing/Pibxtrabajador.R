@@ -1,5 +1,5 @@
 ## 02: Generacion de cuadro pibxtrabajador según rama 2016-2018
-## Andreas Lafferte 
+## Andreas Lafferte y Emi 
 
 
 #1. Librerias ---- 
