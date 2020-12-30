@@ -139,7 +139,7 @@ freq(proc_ohl$representatividad)
 
 # --- 6.1. Recode representatividad ---
 proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.0007421260:0.3000000 = 1; 0.3008130:0.5000000 = 2; 0.5008333:0.991189427312775 = 3; 1.0000000:15.8000000 = 4", as.factor = T)
-proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.991189427312775 = 3", as.factor = T)
+proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.991189427312775 = 3", as.factor = T) # 1= Baja representacion, 2= Mediana representacion, 3= Alta representacion y 4= Sobre representacion
 
 # Posterior al tratamiento de las variables con mucho NA y el joint con las variables exógenas, se pueden renombrar las categorías
 # Recodificar, renombrar y etiquetar las variables a utilizar 
