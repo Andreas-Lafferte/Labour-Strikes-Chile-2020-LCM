@@ -11,7 +11,8 @@ pacman::p_load(dplyr,
                ggpubr, 
                sjmisc,
                sjlabelled, 
-               stargazer)
+               stargazer,
+               sjPlot)
 library(openxlsx)
 ohl<-readWorkbook("input/Labor_Strikes_Dataset_1979_2018_Public.xlsx", detectDates=TRUE)
 
@@ -100,12 +101,45 @@ sjmisc::descr(proc_ohl) # tot_trabajadores tiene un 49% de NA´s y rango_empresa
 # ---- 4. Re-Codification ----
 
 proc_ohl$organizacion <- car::recode(proc_ohl$organizacion,"c(1,2,3,4,5,6,7,8) = 1; 0 = 0; 9 = 0; 10 = 0; 11 = 1; NA = NA", as.factor = T) # 1=Presencia 0=Ausencia
-proc_ohl$legalidad <- car::recode(proc_ohl$legalidad,"1 = 0; 2 = 1", as.factor = T) #1=Legal 2=Extralegal
+proc_ohl$legalidad <- car::recode(proc_ohl$legalidad,"1 = 0; 2 = 1", as.factor = T) #0=Legal 1=Extralegal
 proc_ohl$tactica <- car::recode(proc_ohl$tactica,"c(1,2,3,4) = 1; c(5,6,7) = 0; 8 = 1; c(9,10) = 0; c(11,12) = 1; c(13,14) = 0;
                                 15 = 1; c(16,17) = 0; c(18,19,20,21,22,23,24) = 2; c(25,26,27,28,29,30,31,32,33) = 3;
                                 c(34,35) = 1; 36 = 0; c(37,38,39) = 2; 40 = 0; 41 = 2; 42 = 1; 43 = 2; 45 = 0; 46 = 2; 
                                 c(47,48,49) = 1", as.factor = T) # 0=Públicas, 1=Convencionales y culturales, 2=Disruptivas y 3=Violentas (Fuente: OHL)
-proc_ohl$ano <- as.factor(proc_ohl$ano)                                    
+proc_ohl$rango_empresa <- car::recode(proc_ohl$rango_empresa, "1 = NA; c(2,3,4) = 0; c(5,6,7) = 1; c(8,9) = 2; c(10,11,12,13) = 3", as.factor = T) # 0=Micro, 1=Pequena, 2=Mediana y 3=Gran
+proc_ohl$ano <- as.factor(proc_ohl$ano)
+
+# ---- 5. Tratamiento missing values ----
+descr(proc_ohl$rango_empresa)
+descr(proc_ohl$tot_trabajadores)
+summary(proc_ohl$tot_trabajadores)
+summary(proc_ohl$rango_empresa)
+
+# Tablas de contingencia
+# Rango empresa
+ct <- tab_xtab(var.row = proc_ohl$rango_empresa, proc_ohl$sector,
+         show.cell.prc = T,show.summary = F, show.na = T)
+t1 <- table(proc_ohl$rango_empresa, proc_ohl$sector, useNA = "always")
+
+chisq.test(t1)
+
+# Detección de NA's en rango_empresa
+proc_ohl[is.na(proc_ohl$rango_empresa),]
+sum(is.na(proc_ohl$rango_empresa))
+round(sum(is.na(proc_ohl$rango_empresa))/nrow(proc_ohl)*100,2)
+
+# ---- 6. Variable representatividad sindical ----- 
+proc_ohl <- proc_ohl %>% mutate(tot_trabajadores=as.numeric(tot_trabajadores),
+                              trab_comprometidos=as.numeric(trab_comprometidos),
+                              representatividad=trab_comprometidos/tot_trabajadores) %>% as.data.frame()
+descr(proc_ohl$representatividad)
+summary(proc_ohl$representatividad)
+proc_ohl <- proc_ohl[-c(9)]
+freq(proc_ohl$representatividad)
+
+# --- 6.1. Recode representatividad ---
+proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.0007421260:0.3000000 = 1; 0.3008130:0.5000000 = 2; 0.5008333:0.991189427312775 = 3; 1.0000000:15.8000000 = 4", as.factor = T)
+proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.991189427312775 = 3", as.factor = T)
 
 # Posterior al tratamiento de las variables con mucho NA y el joint con las variables exógenas, se pueden renombrar las categorías
 # Recodificar, renombrar y etiquetar las variables a utilizar 
