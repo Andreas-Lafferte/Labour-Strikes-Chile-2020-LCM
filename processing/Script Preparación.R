@@ -109,6 +109,19 @@ proc_ohl$tactica <- car::recode(proc_ohl$tactica,"c(1,2,3,4) = 1; c(5,6,7) = 0; 
 proc_ohl$rango_empresa <- car::recode(proc_ohl$rango_empresa, "1 = NA; c(2,3,4) = 0; c(5,6,7) = 1; c(8,9) = 2; c(10,11,12,13) = 3", as.factor = T) # 0=Micro, 1=Pequena, 2=Mediana y 3=Gran
 proc_ohl$ano <- as.factor(proc_ohl$ano)
 
+# 4.1. Variable representatividad sindical ---- 
+proc_ohl <- proc_ohl %>% mutate(tot_trabajadores=as.numeric(tot_trabajadores),
+                                trab_comprometidos=as.numeric(trab_comprometidos),
+                                representatividad=trab_comprometidos/tot_trabajadores) %>% as.data.frame()
+descr(proc_ohl$representatividad)
+summary(proc_ohl$representatividad)
+proc_ohl <- proc_ohl[-c(9)]
+freq(proc_ohl$representatividad)
+
+proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.0007421260:0.3000000 = 1; 0.3008130:0.5000000 = 2; 0.5008333:0.991189427312775 = 3; 1.0000000:15.8000000 = 4", as.factor = T)
+proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.991189427312775 = 3", as.factor = T) # 1= Baja representacion, 2= Mediana representacion, 3= Alta representacion y 4= Sobre representacion
+
+
 # ---- 5. Tratamiento missing values ----
 descr(proc_ohl$rango_empresa)
 descr(proc_ohl$tot_trabajadores)
@@ -128,18 +141,49 @@ proc_ohl[is.na(proc_ohl$rango_empresa),]
 sum(is.na(proc_ohl$rango_empresa))
 round(sum(is.na(proc_ohl$rango_empresa))/nrow(proc_ohl)*100,2)
 
-# ---- 6. Variable representatividad sindical ----- 
-proc_ohl <- proc_ohl %>% mutate(tot_trabajadores=as.numeric(tot_trabajadores),
-                              trab_comprometidos=as.numeric(trab_comprometidos),
-                              representatividad=trab_comprometidos/tot_trabajadores) %>% as.data.frame()
-descr(proc_ohl$representatividad)
-summary(proc_ohl$representatividad)
-proc_ohl <- proc_ohl[-c(9)]
-freq(proc_ohl$representatividad)
+# 5.1. Test para patrones de missing ----- 
+install.packages("devtools")
+library(devtools)
+install_github("cran/MissMech")
+library(MissMech)
 
-# --- 6.1. Recode representatividad ---
-proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.0007421260:0.3000000 = 1; 0.3008130:0.5000000 = 2; 0.5008333:0.991189427312775 = 3; 1.0000000:15.8000000 = 4", as.factor = T)
-proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.991189427312775 = 3", as.factor = T) # 1= Baja representacion, 2= Mediana representacion, 3= Alta representacion y 4= Sobre representacion
+df_select <- proc_ohl %>% select(tot_trabajadores,
+                                 rango_empresa,
+                                 trab_comprometidos) %>% as.data.frame()
+df_select <- as_numeric(df_select)
+res <- TestMCARNormality(data=df_select)
+print(res)
+
+install.packages("finalfit")
+library(finalfit)
+
+df_select2 <- proc_ohl%>%select(tot_trabajadores,
+                                rango_empresa,
+                                trab_comprometidos,
+                                sector, representatividad) %>% as.data.frame()
+
+df_select2$rango_empresa <- as.factor(df_select2$rango_empresa)
+df_select2$rango_empresa_MAR <- df_select2$rango_empresa
+df_select2$tot_trabajadores_MAR <- df_select2$tot_trabajadores
+df_select2$rango_empresa_MCAR <- df_select2$rango_empresa
+df_select2$representatividad_MAR <- df_select2$representatividad
+
+explanatory = c("tot_trabajadores", "trab_comprometidos", "sector", "representatividad")
+dependent = "rango_empresa_MAR"
+df_select2 %>% 
+  missing_compare(dependent, explanatory) %>% 
+  knitr::kable(row.names=FALSE, align = c("l", "l", "r", "r", "r"), 
+               caption = "Mean comparisons between values of responders (Not missing) and 
+        non-responders (Missing) on the Rango Empresa variable.")
+
+
+explanatory = c("tot_trabajadores", "trab_comprometidos", "sector", "rango_empresa")
+dependent = "representatividad_MAR"
+df_select2 %>% 
+  missing_compare(dependent, explanatory) %>% 
+  knitr::kable(row.names=FALSE, align = c("l", "l", "r", "r", "r"), 
+               caption = "Mean comparisons between values of responders (Not missing) and 
+        non-responders (Missing) on the Representatividad Sindical variable.")
 
 # Posterior al tratamiento de las variables con mucho NA y el joint con las variables exógenas, se pueden renombrar las categorías
 # Recodificar, renombrar y etiquetar las variables a utilizar 
