@@ -1,4 +1,4 @@
-## 00: Script preparation
+## 00: Script Preparación
 
 # ---- 1. Librerias y datos ----
 pacman::p_load(dplyr, car, summarytools, ggplot2, magrittr, tidyverse, lubridate, ggpubr, sjmisc,
