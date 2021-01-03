@@ -1,18 +1,17 @@
 ## 00: Script preparation
 
 # ---- 1. Librerias y datos ----
-pacman::p_load(dplyr, 
-               car, 
-               summarytools, 
-               ggplot2,
-               magrittr,
-               tidyverse, 
-               lubridate,
-               ggpubr, 
-               sjmisc,
-               sjlabelled, 
-               stargazer,
-               sjPlot)
+pacman::p_load(dplyr, car, summarytools, ggplot2, magrittr, tidyverse, lubridate, ggpubr, sjmisc,
+               sjlabelled, stargazer, sjPlot, devtools)
+#install_github("cran/MissMech")
+library(MissMech)
+#install.packages("finalfit")
+library(finalfit)
+#install.packages("mice")
+library(mice)
+install_github("cran/missForest")
+install.packages("missForest")
+library(missForest)
 library(openxlsx)
 ohl<-readWorkbook("input/Labor_Strikes_Dataset_1979_2018_Public.xlsx", detectDates=TRUE)
 
@@ -142,20 +141,12 @@ sum(is.na(proc_ohl$rango_empresa))
 round(sum(is.na(proc_ohl$rango_empresa))/nrow(proc_ohl)*100,2)
 
 # 5.1. Test para patrones de missing ----- 
-install.packages("devtools")
-library(devtools)
-install_github("cran/MissMech")
-library(MissMech)
-
 df_select <- proc_ohl %>% select(tot_trabajadores,
                                  rango_empresa,
                                  trab_comprometidos) %>% as.data.frame()
 df_select <- as_numeric(df_select)
 res <- TestMCARNormality(data=df_select)
 print(res)
-
-install.packages("finalfit")
-library(finalfit)
 
 df_select2 <- proc_ohl%>%select(tot_trabajadores,
                                 rango_empresa,
@@ -165,7 +156,6 @@ df_select2 <- proc_ohl%>%select(tot_trabajadores,
 df_select2$rango_empresa <- as.factor(df_select2$rango_empresa)
 df_select2$rango_empresa_MAR <- df_select2$rango_empresa
 df_select2$tot_trabajadores_MAR <- df_select2$tot_trabajadores
-df_select2$rango_empresa_MCAR <- df_select2$rango_empresa
 df_select2$representatividad_MAR <- df_select2$representatividad
 
 explanatory = c("tot_trabajadores", "trab_comprometidos", "sector", "representatividad")
@@ -186,16 +176,20 @@ df_select2 %>%
         non-responders (Missing) on the Representatividad Sindical variable.")
 
 # 5.2. Imputation rango empresa ----
-install.packages("mice")
-library(mice)
-
+proc_ohl_mis <- proc_ohl
+# Imputation con mice
 md.pattern(proc_ohl, rotate.names = T)
 imputed_Data <- mice(proc_ohl, maxit = 5, method = 'pmm')
 complete_Data <- complete(imputed_Data)
 proc_ohl$rango_empresa_imp <- complete_Data$rango_empresa
 sum(is.na(proc_ohl$rango_empresa_imp))
-# Posterior al tratamiento de las variables con mucho NA y el joint con las variables exógenas, se pueden renombrar las categorías
-# Recodificar, renombrar y etiquetar las variables a utilizar 
-# Evaluar NA's 
-# Descriptivos de variables de interés, tablas de contingencia y gráficos
-# Finiquitar base de datos procesada para el análisis 
+
+# Imputation con missForest
+sapply(proc_ohl_mis, class)
+proc_ohl_mis$sector <- as.factor(proc_ohl_mis$sector)
+proc_ohl_mis$autoridad <- as.factor(proc_ohl_mis$autoridad)
+imp <- missForest(proc_ohl_mis, verbose = T, variablewise = F)
+imp$OOBerror
+
+dflimpio <- as.data.frame(imp$ximp)
+proc_ohl$rango_empresa_forest <- dflimpio$rango_empresa
