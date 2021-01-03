@@ -1,4 +1,4 @@
-## 00: Script preparacion
+## 00: Script preparation
 
 # ---- 1. Librerias y datos ----
 pacman::p_load(dplyr, 
@@ -185,9 +185,17 @@ df_select2 %>%
                caption = "Mean comparisons between values of responders (Not missing) and 
         non-responders (Missing) on the Representatividad Sindical variable.")
 
+# 5.2. Imputation rango empresa ----
+install.packages("mice")
+library(mice)
+
+md.pattern(proc_ohl, rotate.names = T)
+imputed_Data <- mice(proc_ohl, maxit = 5, method = 'pmm')
+complete_Data <- complete(imputed_Data)
+proc_ohl$rango_empresa_imp <- complete_Data$rango_empresa
+sum(is.na(proc_ohl$rango_empresa_imp))
 # Posterior al tratamiento de las variables con mucho NA y el joint con las variables exógenas, se pueden renombrar las categorías
 # Recodificar, renombrar y etiquetar las variables a utilizar 
 # Evaluar NA's 
 # Descriptivos de variables de interés, tablas de contingencia y gráficos
-# Añadir datos sobre sindicalización por sexo y PIB por rama para evaluar poder asociativo y poder estructural respectivamente
 # Finiquitar base de datos procesada para el análisis 
