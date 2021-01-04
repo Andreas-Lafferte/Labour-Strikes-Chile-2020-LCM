@@ -246,6 +246,7 @@ proc_ohl_2017$autoridad <- as.factor(proc_ohl_2017$autoridad)
 sapply(proc_ohl_2018, class)
 proc_ohl_2018$sector <- as.factor(proc_ohl_2018$sector)
 proc_ohl_2018$autoridad <- as.factor(proc_ohl_2018$autoridad)
+
 # ---- 8. Export ---- 
 save(proc_ohl, file= "data/proc_ohl.RData")
 save(proc_ohl_2016, file= "data/proc_ohl_2016.RData")
