@@ -11,6 +11,7 @@ library(finalfit)
 library(mice)
 #install.packages("missForest")
 library(missForest)
+library(readxl)
 library(openxlsx)
 ohl<-readWorkbook("input/Labor_Strikes_Dataset_1979_2018_Public.xlsx", detectDates=TRUE)
 
@@ -32,7 +33,7 @@ ohl<-ohl %>% mutate(sector=case_when(ciuur2==1 ~ "A Agriculture",
                                      ciuur2==11 ~ "Q Health (private, public and municipalized)",
                                      ciuur2==12 ~ "Q Other Community, Social and Personal Services",
                                      ciuur2==13 ~ "Unknown or Other Activities",
-                                     ciuur2==14 ~ "National Strikes",
+                                     ciuur2==14 ~ "Unknown or Other Activities",
                                      is.na(ciuur2)&ciuur4==1 ~ "A Agriculture",
                                      is.na(ciuur2)&ciuur4==2  ~ "B Mining",
                                      is.na(ciuur2)&ciuur4==3  ~ "C Manufacturing industry",
@@ -192,3 +193,39 @@ imp$OOBerror
 
 dflimpio <- as.data.frame(imp$ximp)
 proc_ohl$rango_empresa_forest <- dflimpio$rango_empresa
+
+# ---- 6. Union de bases ----
+pib_x_trab <- read_excel("output/pib_x_trab.xlsx")
+tasa_sindi_sex <- read_excel("output/tasa_sindi_sex.xlsx")
+
+pib_x_trab <- pib_x_trab[-c(13),]
+tasa_sindi_sex <- tasa_sindi_sex[-c(13,27),]
+
+pib_x_trab <- pib_x_trab %>% mutate(pibxtrab_acum=pibxtrab_2016+pibxtrab_2017+pibxtrab_2018)%>% as.data.frame()
+tasa_sindi_sex <- tasa_sindi_sex %>% mutate(tasa_sind_acum=(tasa_sind_2016+tasa_sind_2017+tasa_sind_2018)/3)%>%as.data.frame()
+
+# pibxtrabajador
+names(pib_x_trab) <- c("sector", "pibxtrab_2016", "pibxtrab_2017", "pibxtrab_2018", "pibxtrab_acum")
+proc_ohl <- merge(proc_ohl, pib_x_trab, by="sector",all.x = TRUE)
+
+# tasa sindicalización por sexo 
+tasa_sindi_sex_homb <- tasa_sindi_sex[-c(14,15,16,17,18,19,20,21,22,23,24,25,26),]
+tasa_sindi_sex_muj <- tasa_sindi_sex[-c(1,2,3,4,5,6,7,8,9,10,11,12,13),]
+
+tasa_sindi_sex_homb <- tasa_sindi_sex_homb[-c(8)]
+tasa_sindi_sex_muj <- tasa_sindi_sex_muj[-c(8)]
+
+names(tasa_sindi_sex_homb) <- c("sector", "ocup_homb_2016", "ocup_homb_2017", "ocup_homb_2018", "afi_homb_2016", "afi_homb_2017", "afi_homb_2018", "tasa_sind_homb_2016", "tasa_sind_homb_2017", "tasa_sind_homb_2018", "tasa_sind_homb_acum")
+names(tasa_sindi_sex_muj) <- c("sector", "ocup_muj_2016", "ocup_muj_2017", "ocup_muj_2018", "afi_muj_2016", "afi_muj_2017", "afi_muj_2018", "tasa_sind_muj_2016", "tasa_sind_muj_2017", "tasa_sind_muj_2018", "tasa_sind_muj_acum")
+
+tasalimpia <- merge(tasa_sindi_sex_homb, tasa_sindi_sex_muj, by="sector",all.x = TRUE)
+proc_ohl <- merge(proc_ohl, tasalimpia, by="sector",all.x = TRUE)
+
+# ---- 7. Guardar data por año y agregado ---- 
+proc_ohl_2016 <- proc_ohl %>% filter(ano==2016)
+proc_ohl_2017 <- proc_ohl %>% filter(ano==2017)
+proc_ohl_2018 <- proc_ohl %>% filter(ano==2018)
+save(proc_ohl, file= "data/proc_ohl.RData")
+save(proc_ohl_2016, file= "data/proc_ohl_2016.RData")
+save(proc_ohl_2017, file= "data/proc_ohl_2017.RData")
+save(proc_ohl_2018, file= "data/proc_ohl_2018.RData")
