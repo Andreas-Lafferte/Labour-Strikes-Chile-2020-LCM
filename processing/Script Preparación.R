@@ -221,15 +221,45 @@ names(tasa_sindi_sex_muj) <- c("sector", "ocup_muj_2016", "ocup_muj_2017", "ocup
 tasalimpia <- merge(tasa_sindi_sex_homb, tasa_sindi_sex_muj, by="sector",all.x = TRUE)
 proc_ohl <- merge(proc_ohl, tasalimpia, by="sector",all.x = TRUE)
 
+# recodificar 
+
+# pibxtrab
+proc_ohl$pibxtrab_2016 <- car::recode(proc_ohl$pibxtrab_2016, "0:13440452.7944397 = 1; 20644094.3464882:43597708.7216876 = 2; 67026090.5882947:169175403.406413 = 3", as.factor = T) # 1= Bajo PESTRC, 2= Mediano PESTRC y 3= Alto PESTRC 
+proc_ohl$pibxtrab_2016 <- car::recode(proc_ohl$pibxtrab_2016, "13440452.7944397 = 1; 67026090.5882947 = 3; 169175403.406413= 3", as.factor = T)
+proc_ohl$pibxtrab_2017 <- car::recode(proc_ohl$pibxtrab_2017, "0:15201465.8050697 = 1; 16278989.718967:29663846.3977053 = 2; 84403495.9479072:154368748.64943 = 3", as.factor = T)
+proc_ohl$pibxtrab_2017 <- car::recode(proc_ohl$pibxtrab_2017, "15201465.8050697= 1; 84403495.9479072 = 3; 154368748.64943 = 3", as.factor = T)
+proc_ohl$pibxtrab_2018 <- car::recode(proc_ohl$pibxtrab_2018, "0:17458587.6262695 = 1; 18576867.3139131:44137961.0073318 = 2; 85502427.9299947:171735781.742852 = 3", as.factor = T)
+proc_ohl$pibxtrab_2018 <- car::recode(proc_ohl$pibxtrab_2018, "17458587.6262695 = 1; 85502427.9299947 = 3", as.factor = T)
+proc_ohl$pibxtrab_acum <- car::recode(proc_ohl$pibxtrab_acum, "0:47475758.8828155 = 1; 57937039.3587867:112901007.846686 = 2; 236932014.466197:481083838.793922 = 3", as.factor = T)
+proc_ohl$pibxtrab_acum <- car::recode(proc_ohl$pibxtrab_acum, "236932014.466197 = 3", as.factor = T)
+
+# tasa sindicalización por sexo y rama
+proc_ohl$tasa_sind_homb_2016 <- car::recode(proc_ohl$tasa_sind_homb_2016, "0.0124899109038837:0.0999779940248183 = 1; 0.107992515253575:0.272922840286331 = 2; 0.516101647197425 = 3; 0.587287926566963 = 3", as.factor = T)
+proc_ohl$tasa_sind_homb_2016 <- car::recode(proc_ohl$tasa_sind_homb_2016, "0.107992515253575 = 2; 0.516101647197425 = 3", as.factor = T)
+proc_ohl$tasa_sind_homb_2017 <- car::recode(proc_ohl$tasa_sind_homb_2017, "0.0108916254790002:0.0852783326754007 = 1; 0.102501256287428:0.267804927627696 = 2; 0.4303622254582 = 3; 0.69744647068036 = 3", as.factor = T)
+proc_ohl$tasa_sind_homb_2017 <- car::recode(proc_ohl$tasa_sind_homb_2017, "0.0108916254790002 = 1; 0.267804927627696 = 2; 0.4303622254582 = 3; 0.69744647068036 = 3", as.factor = T)
+proc_ohl$tasa_sind_homb_2018 <- car::recode(proc_ohl$tasa_sind_homb_2018, "0.0150868311615734:0.0947598835064363 = 1; 0.102051544407887:0.204253650571982 = 2; 0.274932362456316:1.83463720967702 = 3", as.factor = T)
+proc_ohl$tasa_sind_homb_2018 <- car::recode(proc_ohl$tasa_sind_homb_2018, "0.204253650571982 = 2", as.factor = T)
+proc_ohl$tasa_sind_homb_acum <- car::recode(proc_ohl$tasa_sind_homb_acum, "0.0128227891814858:0.0990797112728943 = 1; 0.10587887440465:0.271886710123448 = 2; 0.383572507742536:1.03979053564145 = 3", as.factor = T)
+proc_ohl$tasa_sind_homb_acum <- car::recode(proc_ohl$tasa_sind_homb_acum, "0.0128227891814858 = 1", as.factor = T)
+
+proc_ohl$tasa_sind_muj_2016 <- car::recode(proc_ohl$tasa_sind_muj_2016, "0.0304968846577426:0.0977039589677833 = 1; 0.100030491071061:0.223664443056835 = 2; 0.462106336538543: 0.518033712064499 = 3", as.factor = T)
+proc_ohl$tasa_sind_muj_2016 <- car::recode(proc_ohl$tasa_sind_muj_2016, "0.100030491071061 = 2; 0.462106336538543 = 3", as.factor = T)
+proc_ohl$tasa_sind_muj_2017 <- car::recode(proc_ohl$tasa_sind_muj_2017, "0.0256239057538799:0.0968657377724932 = 1; 0.10620882324068:0.237191424910815 = 2; 0.455204352949961:0.568257888751671 = 3", as.factor = T)
+proc_ohl$tasa_sind_muj_2017 <- car::recode(proc_ohl$tasa_sind_muj_2017, "0.10620882324068 = 2; 0.237191424910815 = 2; 0.568257888751671 = 3", as.factor = T)
+proc_ohl$tasa_sind_muj_2018 <- car::recode(proc_ohl$tasa_sind_muj_2018, "0.0324127369752785:0.0928376130580618 = 1; 0.102268752096189:0.255069256592619 = 2; 0.260302322750259:0.403911069279496 = 3", as.factor = T)
+proc_ohl$tasa_sind_muj_2018 <- car::recode(proc_ohl$tasa_sind_muj_2018, "0.0324127369752785 = 1; 0.0928376130580618 = 1; 0.102268752096189 = 2; 0.255069256592619 = 2; 0.260302322750259 = 3", as.factor = T)
+proc_ohl$tasa_sind_muj_acum <- car::recode(proc_ohl$tasa_sind_muj_acum, "0.0295111757956337:0.0987883278725658 = 1; 0.100979926113027:0.218146854917988 = 2; 0.390793315360374:0.421244940450385 = 3", as.factor = T)
+proc_ohl$tasa_sind_muj_acum <- car::recode(proc_ohl$tasa_sind_muj_acum, "0.0295111757956337 = 1; 0.218146854917988 = 2; 0.421244940450385 = 3", as.factor = T)
+
 # ---- 7. Data por año y agregado ---- 
 proc_ohl_2016 <- proc_ohl %>% filter(ano==2016)
 proc_ohl_2017 <- proc_ohl %>% filter(ano==2017)
 proc_ohl_2018 <- proc_ohl %>% filter(ano==2018)
-# Sacar datos de los años no usados, verificar clase de las variables y ordinalizar variables exógenas 
+ 
 proc_ohl_2016 <- proc_ohl_2016[-c(14,15,18,19,21,22,24,25,28,29,31,32,34,35)]
 proc_ohl_2017 <- proc_ohl_2017[-c(13,15,17,19,20,22,23,25,27,29,30,32,33,35)]
 proc_ohl_2018 <- proc_ohl_2018[-c(13,14,17,18,20,21,23,24,27,28,30,31,33,34)]
-
 
 sapply(proc_ohl, class)
 proc_ohl$sector <- as.factor(proc_ohl$sector)
