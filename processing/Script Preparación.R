@@ -221,10 +221,32 @@ names(tasa_sindi_sex_muj) <- c("sector", "ocup_muj_2016", "ocup_muj_2017", "ocup
 tasalimpia <- merge(tasa_sindi_sex_homb, tasa_sindi_sex_muj, by="sector",all.x = TRUE)
 proc_ohl <- merge(proc_ohl, tasalimpia, by="sector",all.x = TRUE)
 
-# ---- 7. Guardar data por año y agregado ---- 
+# ---- 7. Data por año y agregado ---- 
 proc_ohl_2016 <- proc_ohl %>% filter(ano==2016)
 proc_ohl_2017 <- proc_ohl %>% filter(ano==2017)
 proc_ohl_2018 <- proc_ohl %>% filter(ano==2018)
+# Sacar datos de los años no usados, verificar clase de las variables y ordinalizar variables exógenas 
+proc_ohl_2016 <- proc_ohl_2016[-c(14,15,18,19,21,22,24,25,28,29,31,32,34,35)]
+proc_ohl_2017 <- proc_ohl_2017[-c(13,15,17,19,20,22,23,25,27,29,30,32,33,35)]
+proc_ohl_2018 <- proc_ohl_2018[-c(13,14,17,18,20,21,23,24,27,28,30,31,33,34)]
+
+
+sapply(proc_ohl, class)
+proc_ohl$sector <- as.factor(proc_ohl$sector)
+proc_ohl$autoridad <- as.factor(proc_ohl$autoridad)
+
+sapply(proc_ohl_2016, class)
+proc_ohl_2016$sector <- as.factor(proc_ohl_2016$sector)
+proc_ohl_2016$autoridad <- as.factor(proc_ohl_2016$autoridad)
+
+sapply(proc_ohl_2017, class)
+proc_ohl_2017$sector <- as.factor(proc_ohl_2017$sector)
+proc_ohl_2017$autoridad <- as.factor(proc_ohl_2017$autoridad)
+
+sapply(proc_ohl_2018, class)
+proc_ohl_2018$sector <- as.factor(proc_ohl_2018$sector)
+proc_ohl_2018$autoridad <- as.factor(proc_ohl_2018$autoridad)
+# ---- 8. Export ---- 
 save(proc_ohl, file= "data/proc_ohl.RData")
 save(proc_ohl_2016, file= "data/proc_ohl_2016.RData")
 save(proc_ohl_2017, file= "data/proc_ohl_2017.RData")
