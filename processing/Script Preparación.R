@@ -3,7 +3,7 @@
 # ---- 1. Librerias y datos ----
 pacman::p_load(dplyr, car, summarytools, ggplot2, magrittr, tidyverse, lubridate, ggpubr, sjmisc,
                sjlabelled, stargazer, sjPlot, devtools)
-install_github("cran/MissMech")
+install_github("cran/MissMech", force = TRUE)
 library(MissMech)
 install.packages("finalfit")
 library(finalfit)
@@ -122,8 +122,9 @@ proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.9911894
 
 # 4.2. Variable trabajadores comprometidos ----
 proc_ohl$trab_comprometidos <- as.numeric(proc_ohl$trab_comprometidos)
+proc_ohl$trab_comprometidos <- car::recode(proc_ohl$trab_comprometidos, "1:100 = 1; 101:750 = 2; 755:9673 = 3; 10000:500000 = 4", as.factor = T) #1 = Baja cantidad TC, 2 = Mediana Cantidad TC, 3 = Alta Cantidad TC y 4 = Muy Alta Cantidad TC
 summary(proc_ohl$trab_comprometidos)
-tracomp <- 
+
   
 # ---- 5. Tratamiento missing values ----
 descr(proc_ohl$rango_empresa)
