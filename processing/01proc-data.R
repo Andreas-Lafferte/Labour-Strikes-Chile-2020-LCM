@@ -266,9 +266,9 @@ proc_ohl_2016 <- proc_ohl %>% filter(ano==2016)%>%as.data.frame()
 proc_ohl_2017 <- proc_ohl %>% filter(ano==2017)%>%as.data.frame()
 proc_ohl_2018 <- proc_ohl %>% filter(ano==2018)%>%as.data.frame()
  
-proc_ohl_2016 <- proc_ohl_2016[-c(14,15,18,19,21,22,24,25,28,29,31,32,34,35)]
-proc_ohl_2017 <- proc_ohl_2017[-c(13,15,17,19,20,22,23,25,27,29,30,32,33,35)]
-proc_ohl_2018 <- proc_ohl_2018[-c(13,14,17,18,20,21,23,24,27,28,30,31,33,34)]
+proc_ohl_2016 <- proc_ohl_2016[-c(14,15,18,19,22,23)]
+proc_ohl_2017 <- proc_ohl_2017[-c(13,15,17,19,21,23)]
+proc_ohl_2018 <- proc_ohl_2018[-c(13,14,17,18,21,22)]
 
 sapply(proc_ohl, class)
 proc_ohl$sector <- as.factor(proc_ohl$sector)
