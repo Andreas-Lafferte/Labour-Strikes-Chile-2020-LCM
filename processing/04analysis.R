@@ -13,21 +13,6 @@ proc-ohl-2017 <- load("data/proc-ohl-2017.RData")
 proc-ohl-2018 <- load("data/proc-ohl-2018.RData")
 
 # ---- 3. Analisis descriptivo ---- 
-proc_ohl <- proc_ohl[-c(17,18,19,20,21,22,27,28,29,30,31,32)]
-proc_ohl<- proc_ohl[-c(335,941),] 
-proc_ohl$tactica <- car::recode(proc_ohl$tactica,"44 = 1", as.factor = T) 
-proc_ohl_2016$tactica <- car::recode(proc_ohl_2016$tactica,"44 = 1", as.factor = T)
-proc_ohl_2016$tactica<-factor(proc_ohl_2016$tactica,levels=c(0,1,2,3),labels=c("0","1","2","3"))
-
-proc_ohl_2017$tactica <- car::recode(proc_ohl_2017$tactica,"44 = 1", as.factor = T)
-proc_ohl_2018$tactica <- car::recode(proc_ohl_2018$tactica,"44 = 1", as.factor = T)# 0=Públicas, 1=Convencionales y culturales, 2=Disruptivas y 3=Violentas (Fuente: OHL)
-proc_ohl_2016 <- proc_ohl_2016[-c(15,16,19,20)]
-#proc_ohl_2016<- proc_ohl_2016[-c(161,443),]
-proc_ohl_2017 <- proc_ohl_2017[-c(15,16,19,20)]
-proc_ohl_2018 <- proc_ohl_2018[-c(15,16,19,20)]
-
-
-
 print(summarytools::dfSummary(proc_ohl),  method="viewer")
 print(summarytools::dfSummary(proc_ohl_2016),  method="viewer")
 print(summarytools::dfSummary(proc_ohl_2017),  method="viewer")
