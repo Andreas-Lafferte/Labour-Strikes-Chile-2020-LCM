@@ -100,11 +100,11 @@ sjmisc::descr(proc_ohl) # tot_trabajadores tiene un 49% de NA´s y rango_empresa
 
 # ---- 4. Re-Codification ----
 
-proc_ohl$organizacion <- car::recode(proc_ohl$organizacion,"c(1,2,3,4,5,6,7,8) = 1; 0 = 0; 9 = 0; 10 = 0; 11 = 1; NA = NA", as.factor = T) # 1=Presencia 0=Ausencia
+proc_ohl$organizacion <- car::recode(proc_ohl$organizacion,"0 = 0; c(1,2,3) = 1; 4 = 2; 5 = 1; c(6,7) = 2; 8 = 1; 9 = 0; 10 = 0; 11 = 1; NA = NA", as.factor = T) # 1=Presencia 0=Ausencia
 proc_ohl$legalidad <- car::recode(proc_ohl$legalidad,"1 = 0; 2 = 1", as.factor = T) #0=Legal 1=Extralegal
 proc_ohl$tactica <- car::recode(proc_ohl$tactica,"c(1,2,3,4) = 1; c(5,6,7) = 0; 8 = 1; c(9,10) = 0; c(11,12) = 1; c(13,14) = 0;
                                 15 = 1; c(16,17) = 0; c(18,19,20,21,22,23,24) = 2; c(25,26,27,28,29,30,31,32,33) = 3;
-                                c(34,35) = 1; 36 = 0; c(37,38,39) = 2; 40 = 0; 41 = 2; 42 = 1; 43 = 2; 45 = 0; 46 = 2; 
+                                c(34,35) = 1; 36 = 0; c(37,38,39) = 2; 40 = 0; 41 = 2; 42 = 1; 43 = 2; 44 = 1; 45 = 0; 46 = 2; 
                                 c(47,48,49) = 1", as.factor = T) # 0=Públicas, 1=Convencionales y culturales, 2=Disruptivas y 3=Violentas (Fuente: OHL)
 proc_ohl$rango_empresa <- car::recode(proc_ohl$rango_empresa, "1 = NA; c(2,3,4) = 0; c(5,6,7) = 1; c(8,9) = 2; c(10,11,12,13) = 3", as.factor = T) # 0=Micro, 1=Pequena, 2=Mediana y 3=Gran
 proc_ohl$ano <- as.factor(proc_ohl$ano)
@@ -257,6 +257,9 @@ proc_ohl$tasa_sind_muj_2018 <- car::recode(proc_ohl$tasa_sind_muj_2018, "0.03241
 proc_ohl$tasa_sind_muj_2018 <- car::recode(proc_ohl$tasa_sind_muj_2018, "0.0324127369752785 = 1; 0.0928376130580618 = 1; 0.102268752096189 = 2; 0.255069256592619 = 2; 0.260302322750259 = 3", as.factor = T)
 proc_ohl$tasa_sind_muj_acum <- car::recode(proc_ohl$tasa_sind_muj_acum, "0.0295111757956337:0.0987883278725658 = 1; 0.100979926113027:0.218146854917988 = 2; 0.390793315360374:0.421244940450385 = 3", as.factor = T)
 proc_ohl$tasa_sind_muj_acum <- car::recode(proc_ohl$tasa_sind_muj_acum, "0.0295111757956337 = 1; 0.218146854917988 = 2; 0.421244940450385 = 3", as.factor = T)
+
+proc_ohl <- proc_ohl[-c(17,18,19,20,21,22,27,28,29,30,31,32)]
+proc_ohl<- proc_ohl[-c(335,941),]
 
 # ---- 7. Data por año y agregado ---- 
 proc_ohl_2016 <- proc_ohl %>% filter(ano==2016)%>%as.data.frame()
