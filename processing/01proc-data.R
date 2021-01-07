@@ -284,7 +284,7 @@ proc_ohl_2018$sector <- as.factor(proc_ohl_2018$sector)
 proc_ohl_2018$autoridad <- as.factor(proc_ohl_2018$autoridad)
 
 # ---- 8. Export ---- 
-write_xlsx(proc_ohl,"data/proc_ohl.xlsx", col_names = TRUE,format_headers = TRUE)
-write_xlsx(proc_ohl_2016,"data/proc_ohl_2016.xlsx", col_names = TRUE,format_headers = TRUE)
-write_xlsx(proc_ohl_2017,"data/proc_ohl_2017.xlsx", col_names = TRUE,format_headers = TRUE)
-write_xlsx(proc_ohl_2018,"data/proc_ohl_2018.xlsx", col_names = TRUE,format_headers = TRUE)
+save(proc_ohl, file= "data/proc-ohl.RData")
+save(proc_ohl_2016, file= "data/proc-ohl-2016.RData")
+save(proc_ohl_2017, file= "data/proc-ohl-2017.RData")
+save(proc_ohl_2018, file= "data/proc-ohl-2018.RData")

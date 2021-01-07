@@ -7,10 +7,10 @@ pacman::p_load(dplyr, car, summarytools, ggplot2, magrittr, tidyverse, sjmisc, s
 options(scipen=999) # valores sin notación científica
 
 # ---- 2. Datos ---- 
-proc_ohl <- load("data/proc_ohl.RData")  %>% as.data.frame()
-proc_ohl_2016 <- load("data/proc_ohl_2016.RData") %>% as.data.frame()
-proc_ohl_2017 <- load("data/proc_ohl_2017.RData") %>% as.data.frame()
-proc_ohl_2018 <- load("data/proc_ohl_2018.RData") %>% as.data.frame()
+proc_ohl <- 
+proc_ohl_2016 <- 
+proc_ohl_2017 <- 
+proc_ohl_2018 <- 
 
 # ---- 3. Analisis descriptivo ---- 
 
