@@ -3,13 +3,13 @@
 # ---- 1. Librerias y datos ----
 pacman::p_load(dplyr, car, summarytools, ggplot2, magrittr, tidyverse, lubridate, ggpubr, sjmisc,
                sjlabelled, stargazer, sjPlot, devtools)
-install_github("cran/MissMech", force = TRUE)
+#install_github("cran/MissMech", force = TRUE)
 library(MissMech)
-install.packages("finalfit")
+#install.packages("finalfit")
 library(finalfit)
-install.packages("mice")
+#install.packages("mice")
 library(mice)
-install.packages("missForest")
+#install.packages("missForest")
 library(missForest)
 library(readxl)
 library(openxlsx)
