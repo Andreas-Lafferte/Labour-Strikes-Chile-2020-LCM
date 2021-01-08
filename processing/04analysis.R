@@ -3,7 +3,7 @@
 # ---- 1. Librerias -----
 pacman::p_load(dplyr, car, summarytools, ggplot2, magrittr, tidyverse, sjmisc, sjlabelled, 
                stargazer, sjPlot, devtools, ggmosaic, texreg, kableExtra, webshot, readxl,
-               openxlsx, psych, MASS, scatterplot3d, poLCA, reshape, writexl, readr)
+               openxlsx, psych, MASS, scatterplot3d, poLCA, reshape, writexl, readr, corrplot)
 options(scipen=999) # valores sin notación científica
 
 # ---- 2. Datos ---- 
@@ -37,7 +37,7 @@ table(proc_ohl$tactica, proc_ohl$trab_comprometidos, useNA = "always")
 
 # 5.1. Matriz año 2016
 x1 <- proc_ohl_2016$organizacion
-x2 <- proc_ohl_2016$representatividad
+x2 <- proc_ohl_2016$representatividad # evaluar por NA's
 x3 <- proc_ohl_2016$rango_empresa_imp
 x4 <- proc_ohl_2016$pibxtrab_2016
 x5 <- proc_ohl_2016$tactica
@@ -47,36 +47,20 @@ x8 <- proc_ohl_2016$tasa_sind_muj_2016
 
 polychoric(data.frame(x1, x2, x3, x4, x5, x6, x7, x8), na.rm = T)
 
+cor01<-polychoric(data.frame(x1, x2, x3, x4, x5, x6, x7, x8), na.rm = T)
+rownames(cor01$rho) <- c("A. organización", "B. representatividad", "C. rango.empresa", "D. pibxtrab", "E. tactica", "F. trab.comprometidos", "G. sindi.h", "H. sindi.m")
+colnames(cor01$rho) <- c(" (A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
+tab_corr(cor01$rho,
+         triangle = "lower")
+
 ohl_2016 <- data.frame(x1,x2,x3,x4,x5,x6,x7,x8)
 
 f <-cbind(x1, x2, x3, x4, x5, x6, x7, x8)~1
 
-ncol(ohl_2016)
-
 # 5.2. Matriz año 2017 
-
-# 5.3. Matriz año 2018 
-
-# 5.4. Matriz acumulada 
-
-# ---- 6. Modelos ----
-
-# 6.1. Año 2016 ----
-
-M1<-poLCA(formula = f, data = ohl_2016, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
-M2<-poLCA(formula = f, data = ohl_2016, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
-M3<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
-M4<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F)
- 
-#M4<-poLCA(formula = f, data = seguridad, nclass = 4, maxiter = 2000, nrep = 3, na.rm = TRUE) # nrep =1 falso máximo 
-#M5<-poLCA(formula = f, data = seguridad, nclass = 5, maxiter = 2000, nrep = 3, na.rm = TRUE) #ALERT: iterations finished, MAXIMUM LIKELIHOOD NOT FOUND, tengo que suber el maxiter y el nrep 
-#M5<-poLCA(formula = f, data = seguridad, nclass = 5, maxiter = 16000, nrep = 5, na.rm = TRUE)
-
-# 6.2. Año 2017
-
 y1 <- proc_ohl_2017$organizacion
-y2 <- proc_ohl_2017$rango_empresa_imp
-y3 <- proc_ohl_2017$representatividad
+y2 <- proc_ohl_2017$representatividad
+y3 <- proc_ohl_2017$rango_empresa_imp
 y4 <- proc_ohl_2017$pibxtrab_2017
 y5 <- proc_ohl_2017$tactica
 y6 <- proc_ohl_2017$trab_comprometidos 
@@ -85,20 +69,20 @@ y8 <- proc_ohl_2017$tasa_sind_muj_2017
 
 polychoric(data.frame(y1, y2, y3, y4, y5, y6, y7, y8), na.rm = T)
 
+cor02<-polychoric(data.frame(y1, y2, y3, y4, y5, y6, y7, y8), na.rm = T)
+rownames(cor02$rho) <- c("A. organización", "B. representatividad", "C. rango.empresa", "D. pibxtrab", "E. tactica", "F. trab.comprometidos", "G. sindi.h", "H. sindi.m")
+colnames(cor02$rho) <- c(" (A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
+tab_corr(cor02$rho,
+         triangle = "lower")
+
 ohl_2017 <- data.frame(y1, y2, y3, y4, y5, y6, y7, y8)
 
 t <-cbind(y1, y2, y3, y4, y5, y6, y7, y8)~1
 
-M1<-poLCA(formula = t, data = ohl_2017, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
-M2<-poLCA(formula = t, data = ohl_2017, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
-M3<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
-M4<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F)
-M5<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F)
-
-# 6.3. Año 2018 
+# 5.3. Matriz año 2018 
 z1 <- proc_ohl_2018$organizacion
-z2 <- proc_ohl_2018$rango_empresa_imp
-z3 <- proc_ohl_2018$representatividad
+z2 <- proc_ohl_2018$representatividad
+z3 <- proc_ohl_2018$rango_empresa_imp
 z4 <- proc_ohl_2018$pibxtrab_2018
 z5 <- proc_ohl_2018$tactica
 z6 <- proc_ohl_2018$trab_comprometidos 
@@ -107,11 +91,60 @@ z8 <- proc_ohl_2018$tasa_sind_muj_2018
 
 polychoric(data.frame(z1, z2, z3, z4, z5, z6, z7, z8), na.rm = T)
 
+cor03<-polychoric(data.frame(z1, z2, z3, z4, z5, z6, z7, z8), na.rm = T)
+rownames(cor03$rho) <- c("A. organización", "B. representatividad", "C. rango.empresa", "D. pibxtrab", "E. tactica", "F. trab.comprometidos", "G. sindi.h", "H. sindi.m")
+colnames(cor03$rho) <- c(" (A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
+tab_corr(cor03$rho,
+         triangle = "lower")
+
 ohl_2018 <- data.frame(z1, z2, z3, z4, z5, z6, z7, z8)
 
 r <-cbind(z1, z2, z3, z4, z5, z6, z7, z8)~1
 
+# 5.4. Matriz acumulada 
+a1 <- proc_ohl$organizacion
+a2 <- proc_ohl$representatividad
+a3 <- proc_ohl$rango_empresa_imp
+a4 <- proc_ohl$pibxtrab_acum
+a5 <- proc_ohl$tactica
+a6 <- proc_ohl$trab_comprometidos 
+a7 <- proc_ohl$tasa_sind_homb_acum
+a8 <- proc_ohl$tasa_sind_muj_acum
 
+polychoric(data.frame(a1, a2, a3, a4, a5, a6, a7, a8), na.rm = T)
+
+cor04<-polychoric(data.frame(a1, a2, a3, a4, a5, a6, a7, a8), na.rm = T)
+rownames(cor04$rho) <- c("A. organización", "B. representatividad", "C. rango.empresa", "D. pibxtrab", "E. tactica", "F. trab.comprometidos", "G. sindi.h", "H. sindi.m")
+colnames(cor04$rho) <- c(" (A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
+tab_corr(cor04$rho,
+         triangle = "lower")
+
+ohl_acum <- data.frame(a1, a2, a3, a4, a5, a6, a7, a8)
+
+k <-cbind(a1, a2, a3, a4, a5, a6, a7, a8)~1
+
+# ---- 6. Modelos ----
+
+# 6.1. Año 2016 ----
+M1<-poLCA(formula = f, data = ohl_2016, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
+M2<-poLCA(formula = f, data = ohl_2016, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
+M3<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
+M4<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 2, na.rm = F)
+M5<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F)# nrep = 1 falso máximo
+M6<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F)
+M7<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F)
+M8<-poLCA(formula = f, data = ohl_2016, nclass = 5, maxiter = 2000, nrep = 3, na.rm = F)
+
+# M5 el mejor modelo con 3 clases latentes y ajuste alto/ M8 mejor modelo con 5 clases latentes y ajuste bajo
+
+# 6.2. Año 2017
+M1<-poLCA(formula = t, data = ohl_2017, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
+M2<-poLCA(formula = t, data = ohl_2017, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
+M3<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
+M4<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F)
+M5<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F)
+
+# 6.3. Año 2018 
 M1<-poLCA(formula = r, data = ohl_2018, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
 M2<-poLCA(formula = r, data = ohl_2018, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
 M3<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
@@ -121,28 +154,12 @@ M6<-poLCA(formula = r, data = ohl_2018, nclass = 5, maxiter = 2000, nrep = 5, na
 M6<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 16000, nrep = 5, na.rm = F)
 
 # 6.4. Acumulado 
-a1 <- proc_ohl$organizacion
-a2 <- proc_ohl$rango_empresa_imp
-a3 <- proc_ohl$representatividad
-a4 <- proc_ohl$pibxtrab_acum
-a5 <- proc_ohl$tactica
-a6 <- proc_ohl$trab_comprometidos 
-a7 <- proc_ohl$tasa_sind_homb_acum
-a8 <- proc_ohl$tasa_sind_muj_acum
-
-polychoric(data.frame(a1, a2, a3, a4, a5, a6, a7, a8), na.rm = T)
-
-ohl_acum <- data.frame(a1, a2, a3, a4, a5, a6, a7, a8)
-
-k <-cbind(a1, a2, a3, a4, a5, a6, a7, a8)~1
-
 M1<-poLCA(formula = k, data = ohl_acum, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
 M2<-poLCA(formula = k, data = ohl_acum, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
 M3<-poLCA(formula = k, data = ohl_acum, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F) # M Parsimonia
 M4<-poLCA(formula = k, data = ohl_acum, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F) 
 M5<-poLCA(formula = k, data = ohl_acum, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F) # M 
 M6<-poLCA(formula = k, data = ohl_acum, nclass = 5, maxiter = 2000, nrep = 5, na.rm = F)
-
 
 # ---- 7. Ajuste ---- 
 M3$predcell
