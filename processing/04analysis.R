@@ -49,7 +49,7 @@ polychoric(data.frame(x1, x2, x3, x4, x5, x6, x7, x8), na.rm = T)
 
 cor01<-polychoric(data.frame(x1, x2, x3, x4, x5, x6, x7, x8), na.rm = T)
 rownames(cor01$rho) <- c("A. organización", "B. representatividad", "C. rango.empresa", "D. pibxtrab", "E. tactica", "F. trab.comprometidos", "G. sindi.h", "H. sindi.m")
-colnames(cor01$rho) <- c(" (A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
+colnames(cor01$rho) <- c("(A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
 tab_corr(cor01$rho,
          triangle = "lower")
 
@@ -71,7 +71,7 @@ polychoric(data.frame(y1, y2, y3, y4, y5, y6, y7, y8), na.rm = T)
 
 cor02<-polychoric(data.frame(y1, y2, y3, y4, y5, y6, y7, y8), na.rm = T)
 rownames(cor02$rho) <- c("A. organización", "B. representatividad", "C. rango.empresa", "D. pibxtrab", "E. tactica", "F. trab.comprometidos", "G. sindi.h", "H. sindi.m")
-colnames(cor02$rho) <- c(" (A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
+colnames(cor02$rho) <- c("(A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
 tab_corr(cor02$rho,
          triangle = "lower")
 
@@ -93,7 +93,7 @@ polychoric(data.frame(z1, z2, z3, z4, z5, z6, z7, z8), na.rm = T)
 
 cor03<-polychoric(data.frame(z1, z2, z3, z4, z5, z6, z7, z8), na.rm = T)
 rownames(cor03$rho) <- c("A. organización", "B. representatividad", "C. rango.empresa", "D. pibxtrab", "E. tactica", "F. trab.comprometidos", "G. sindi.h", "H. sindi.m")
-colnames(cor03$rho) <- c(" (A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
+colnames(cor03$rho) <- c("(A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
 tab_corr(cor03$rho,
          triangle = "lower")
 
@@ -128,15 +128,15 @@ k <-cbind(a1, a2, a3, a4, a5, a6, a7, a8)~1
 # 6.1. Año 2016 ----
 M1<-poLCA(formula = f, data = ohl_2016, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
 M2<-poLCA(formula = f, data = ohl_2016, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
-M3<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
-M4<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 2, na.rm = F)
-M5<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F)# nrep = 1 falso máximo
+M3<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F) # este
+M4<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 2, na.rm = F)# nrep = 1 falso máximo
+M5<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F)
 M6<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F)
 M7<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F)
 M8<-poLCA(formula = f, data = ohl_2016, nclass = 5, maxiter = 2000, nrep = 3, na.rm = F)
 M9<-poLCA(formula = f, data = ohl_2016, nclass = 6, maxiter = 2000, nrep = 3, na.rm = F)
 
-# M5 el mejor modelo con 3 clases latentes y ajuste alto/ M8 mejor modelo con 5 clases latentes y ajuste bajo
+# M3 el mejor modelo con 3 clases latentes y ajuste alto/ M9 mejor modelo con 6 clases latentes y ajuste bajo
 
 
 # 6.2. Año 2017
@@ -152,22 +152,22 @@ M9<-poLCA(formula = f, data = ohl_2016, nclass = 6, maxiter = 2000, nrep = 3, na
 
 # 7.1. Ajuste año 2016 
 M1$predcell
-M5$predcell
-M8$predcell
+M3$predcell
+M9$predcell
 
 p1<-1-pchisq(M1$Chisq, M1$resid.df)
 p2<-1-pchisq(M2$Chisq, M2$resid.df)
-p3<-1-pchisq(M5$Chisq, M5$resid.df)
+p3<-1-pchisq(M3$Chisq, M3$resid.df)
 p4<-1-pchisq(M7$Chisq, M7$resid.df)
-p5<-1-pchisq(M8$Chisq, M8$resid.df)
+p5<-1-pchisq(M9$Chisq, M9$resid.df)
 
-AjusteM_2016<-data.frame(c("M1", "M2", "M5", "M7", "M8"),
-                         c(M1$llik, M2$llik, M5$llik, M7$llik, M8$llik),
-                         c(M1$Chisq, M2$Chisq,M5$Chisq, M7$Chisq, M8$Chisq),
-                         c(M1$Gsq, M2$Gsq, M5$Gsq, M7$Gsq, M8$Gsq),
-                         c(M1$npar, M2$npar, M5$npar, M7$npar, M8$npar),
-                         c(M1$aic, M2$aic, M5$aic, M7$aic, M8$aic),
-                         c(M1$bic, M2$bic, M5$bic, M7$bic, M8$bic),
+AjusteM_2016<-data.frame(c("M1", "M2", "M3", "M7", "M9"),
+                         c(M1$llik, M2$llik, M3$llik, M7$llik, M9$llik),
+                         c(M1$Chisq, M2$Chisq, M3$Chisq, M7$Chisq, M9$Chisq),
+                         c(M1$Gsq, M2$Gsq, M3$Gsq, M7$Gsq, M9$Gsq),
+                         c(M1$npar, M2$npar, M3$npar, M7$npar, M9$npar),
+                         c(M1$aic, M2$aic, M3$aic, M7$aic, M9$aic),
+                         c(M1$bic, M2$bic, M3$bic, M7$bic, M9$bic),
                          c(p1, p2, p3, p4, p5))
 colnames(AjusteM_2016)<-c("Modelo", "Loglike", "X2", "G2", "DF", "AIC", "BIC", "P-value")
 
@@ -175,8 +175,8 @@ View(AjusteM_2016)
 
 # Gráfico año 2016 
 
-plotdatos <- melt(M8$probs) # función de reshape que me permite 'dar vuelta' una tabla
-plotdatos2 <- plotdatos[plotdatos$X2=="1",]
+plotdatos <- melt(M3$probs) # función de reshape que me permite 'dar vuelta' una tabla
+plotdatos2 <- plotdatos[plotdatos$X2=="2",]
 # el probs son las probabilidades condicionales 
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
@@ -188,6 +188,5 @@ ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
   theme(legend.position = "bottom",plot.title = element_text(size=12),
         plot.subtitle = element_text(size=10),
         plot.caption = element_text(size=8)) 
-
 
 # ---- 8. Export ----
