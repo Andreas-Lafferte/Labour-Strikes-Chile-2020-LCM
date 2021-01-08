@@ -134,8 +134,10 @@ M5<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 3, na
 M6<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F)
 M7<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F)
 M8<-poLCA(formula = f, data = ohl_2016, nclass = 5, maxiter = 2000, nrep = 3, na.rm = F)
+M9<-poLCA(formula = f, data = ohl_2016, nclass = 6, maxiter = 2000, nrep = 3, na.rm = F)
 
 # M5 el mejor modelo con 3 clases latentes y ajuste alto/ M8 mejor modelo con 5 clases latentes y ajuste bajo
+
 
 # 6.2. Año 2017
 M1<-poLCA(formula = t, data = ohl_2017, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
@@ -162,25 +164,45 @@ M5<-poLCA(formula = k, data = ohl_acum, nclass = 4, maxiter = 2000, nrep = 5, na
 M6<-poLCA(formula = k, data = ohl_acum, nclass = 5, maxiter = 2000, nrep = 5, na.rm = F)
 
 # ---- 7. Ajuste ---- 
-M3$predcell
-M3$predclass
 
+# 7.1. Ajuste año 2016 
+M1$predcell
+M5$predcell
+M8$predcell
 
 p1<-1-pchisq(M1$Chisq, M1$resid.df)
 p2<-1-pchisq(M2$Chisq, M2$resid.df)
-p3<-1-pchisq(M3$Chisq, M3$resid.df)
-p4<-1-pchisq(M4$Chisq, M4$resid.df)
-p5<-1-pchisq(M5$Chisq, M5$resid.df)
+p3<-1-pchisq(M5$Chisq, M5$resid.df)
+p4<-1-pchisq(M7$Chisq, M7$resid.df)
+p5<-1-pchisq(M8$Chisq, M8$resid.df)
 
-AjusteM1<-data.frame(c("M1", "M2", "M3", "M4", "M5"),
-                     c(M1$llik, M2$llik, M3$llik, M4$llik, M5$llik),
-                     c(M1$Chisq, M2$Chisq,M3$Chisq, M4$Chisq, M5$Chisq),
-                     c(M1$Gsq, M2$Gsq, M3$Gsq, M4$Gsq, M5$Gsq),
-                     c(M1$npar, M2$npar, M3$npar, M4$npar, M5$npar),
-                     c(M1$aic, M2$aic, M3$aic, M4$aic, M5$aic),
-                     c(M1$bic, M2$bic, M3$bic, M4$bic, M5$bic),
-                     c(p1, p2, p3, p4, p5))
-colnames(AjusteM1)<-c("Modelo", "Loglike", "X2", "G2", "DF", "AIC", "BIC", "P-value")
+AjusteM_2016<-data.frame(c("M1", "M2", "M5", "M7", "M8"),
+                         c(M1$llik, M2$llik, M5$llik, M7$llik, M8$llik),
+                         c(M1$Chisq, M2$Chisq,M5$Chisq, M7$Chisq, M8$Chisq),
+                         c(M1$Gsq, M2$Gsq, M5$Gsq, M7$Gsq, M8$Gsq),
+                         c(M1$npar, M2$npar, M5$npar, M7$npar, M8$npar),
+                         c(M1$aic, M2$aic, M5$aic, M7$aic, M8$aic),
+                         c(M1$bic, M2$bic, M5$bic, M7$bic, M8$bic),
+                         c(p1, p2, p3, p4, p5))
+colnames(AjusteM_2016)<-c("Modelo", "Loglike", "X2", "G2", "DF", "AIC", "BIC", "P-value")
 
-View(AjusteM1)
+View(AjusteM_2016)
+
+# Gráfico año 2016 
+
+plotdatos <- melt(M8$probs) # función de reshape que me permite 'dar vuelta' una tabla
+plotdatos2 <- plotdatos[plotdatos$X2=="1",]
+# el probs son las probabilidades condicionales 
+
+ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
+  geom_point() + geom_line() + theme_classic() + 
+  labs(title = "Gráfico 1. Predicciones de clase año 2016.",
+       x="Variables",
+       y = "Valores",
+       caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
+  theme(legend.position = "bottom",plot.title = element_text(size=12),
+        plot.subtitle = element_text(size=10),
+        plot.caption = element_text(size=8)) 
+
+
 # ---- 8. Export ----
