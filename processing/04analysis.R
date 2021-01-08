@@ -34,9 +34,11 @@ tab_xtab(var.row = proc_ohl$tactica, proc_ohl$trab_comprometidos,
 table(proc_ohl$tactica, proc_ohl$trab_comprometidos, useNA = "always")
 
 # ---- 5. Matriz ---- 
+
+# 5.1. Matriz año 2016
 x1 <- proc_ohl_2016$organizacion
-x2 <- proc_ohl_2016$rango_empresa_imp
-x3 <- proc_ohl_2016$representatividad
+x2 <- proc_ohl_2016$representatividad
+x3 <- proc_ohl_2016$rango_empresa_imp
 x4 <- proc_ohl_2016$pibxtrab_2016
 x5 <- proc_ohl_2016$tactica
 x6 <- proc_ohl_2016$trab_comprometidos 
@@ -50,6 +52,12 @@ ohl_2016 <- data.frame(x1,x2,x3,x4,x5,x6,x7,x8)
 f <-cbind(x1, x2, x3, x4, x5, x6, x7, x8)~1
 
 ncol(ohl_2016)
+
+# 5.2. Matriz año 2017 
+
+# 5.3. Matriz año 2018 
+
+# 5.4. Matriz acumulada 
 
 # ---- 6. Modelos ----
 
