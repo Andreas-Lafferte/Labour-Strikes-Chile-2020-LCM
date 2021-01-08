@@ -140,28 +140,13 @@ M9<-poLCA(formula = f, data = ohl_2016, nclass = 6, maxiter = 2000, nrep = 3, na
 
 
 # 6.2. Año 2017
-M1<-poLCA(formula = t, data = ohl_2017, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
-M2<-poLCA(formula = t, data = ohl_2017, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
-M3<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
-M4<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F)
-M5<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F)
+
 
 # 6.3. Año 2018 
-M1<-poLCA(formula = r, data = ohl_2018, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
-M2<-poLCA(formula = r, data = ohl_2018, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
-M3<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
-M4<-poLCA(formula = r, data = ohl_2018, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F) # M
-M5<-poLCA(formula = r, data = ohl_2018, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F)# 
-M6<-poLCA(formula = r, data = ohl_2018, nclass = 5, maxiter = 2000, nrep = 5, na.rm = F)
-M6<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 16000, nrep = 5, na.rm = F)
+
 
 # 6.4. Acumulado 
-M1<-poLCA(formula = k, data = ohl_acum, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
-M2<-poLCA(formula = k, data = ohl_acum, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
-M3<-poLCA(formula = k, data = ohl_acum, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F) # M Parsimonia
-M4<-poLCA(formula = k, data = ohl_acum, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F) 
-M5<-poLCA(formula = k, data = ohl_acum, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F) # M 
-M6<-poLCA(formula = k, data = ohl_acum, nclass = 5, maxiter = 2000, nrep = 5, na.rm = F)
+
 
 # ---- 7. Ajuste ---- 
 

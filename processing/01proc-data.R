@@ -99,17 +99,17 @@ freq(proc_ohl$autoridad)
 sjmisc::descr(proc_ohl) # tot_trabajadores tiene un 49% de NA´s y rango_empresa un 46% de NA´s
 
 # ---- 4. Re-Codification ----
-proc_ohl$organizacion <- car::recode(proc_ohl$organizacion,"0 = 0; c(1,2,3) = 1; 4 = 2; 5 = 1; c(6,7) = 2; 8 = 1; 9 = 0; 10 = 0; 11 = 1; NA = NA", as.factor = T) #  0=Ausencia, 1=Presencia, 2= Suprasindical
-proc_ohl$legalidad <- car::recode(proc_ohl$legalidad,"1 = 0; 2 = 1", as.factor = T) #0=Legal 1=Extralegal
-proc_ohl$tactica <- car::recode(proc_ohl$tactica,"c(1,2,3,4) = 1; c(5,6,7) = 0; 8 = 1; c(9,10) = 0; c(11,12) = 1; c(13,14) = 0;
-                                15 = 1; c(16,17) = 0; c(18,19,20,21,22,23,24) = 2; c(25,26,27,28,29,30,31,32,33) = 3;
-                                c(34,35) = 1; 36 = 0; c(37,38,39) = 2; 40 = 0; 41 = 2; 42 = 1; 43 = 2; 44 = 1; 45 = 0; 46 = 2; 
-                                c(47,48,49) = 1", as.factor = T) # 0=Públicas, 1=Convencionales y culturales, 2=Disruptivas y 3=Violentas (Fuente: OHL)
-proc_ohl$tactica<-factor(proc_ohl$tactica,levels=c(0,1,2,3),labels=c("0","1","2","3"))
-proc_ohl$rango_empresa <- car::recode(proc_ohl$rango_empresa, "1 = NA; c(2,3,4) = 0; c(5,6,7) = 1; c(8,9) = 2; c(10,11,12,13) = 3", as.factor = T) # 0=Micro, 1=Pequena, 2=Mediana y 3=Gran
+proc_ohl$organizacion <- car::recode(proc_ohl$organizacion,"0 = 1; c(1,2,3) = 2; 4 = 3; 5 = 2; c(6,7) = 3; 8 = 2; 9 = 1; 10 = 1; 11 = 2; NA = NA", as.factor = T) #  1=Ausencia, 2=Sindicato empresa, 3= Suprasindical
+proc_ohl$legalidad <- car::recode(proc_ohl$legalidad,"1 = 1; 2 = 2", as.factor = T) #1=Legal 2=Extralegal
+proc_ohl$tactica <- car::recode(proc_ohl$tactica,"c(1,2,3,4) = 1; c(5,6,7) = 1; 8 = 1; c(9,10) = 1; c(11,12) = 1; c(13,14) = 1;
+                                15 = 1; c(16,17) = 1; c(18,19,20,21,22,23,24) = 2; c(25,26,27,28,29,30,31,32,33) = 3;
+                                c(34,35) = 1; 36 = 1; c(37,38,39) = 2; 40 = 1; 41 = 2; 42 = 1; 43 = 2; 44 = 1; 45 = 1; 46 = 2; 
+                                c(47,48,49) = 1", as.factor = T) # 1=Públicas, Convencionales y culturales, 2=Disruptivas y 3=Violentas (Fuente: OHL)
+proc_ohl$tactica<-factor(proc_ohl$tactica,levels=c(1,2,3),labels=c("1","2","3"))
+proc_ohl$rango_empresa <- car::recode(proc_ohl$rango_empresa, "1 = NA; c(2,3,4) = 1; c(5,6,7) = 1; c(8,9) = 2; c(10,11,12,13) = 3", as.factor = T) #1=Micro y Pequena, 2=Mediana y 3=Gran
 proc_ohl$ano <- as.factor(proc_ohl$ano)
 
-# 4.1. Variable representatividad sindical ---- 
+# 4.1. Variable representatividad sindical  
 proc_ohl <- proc_ohl %>% mutate(tot_trabajadores=as.numeric(tot_trabajadores),
                                 trab_comprometidos=as.numeric(trab_comprometidos),
                                 representatividad=trab_comprometidos/tot_trabajadores) %>% as.data.frame()
@@ -118,12 +118,14 @@ summary(proc_ohl$representatividad)
 proc_ohl <- proc_ohl[-c(9)]
 freq(proc_ohl$representatividad)
 
-proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.0007421260:0.3000000 = 1; 0.3008130:0.5000000 = 2; 0.5008333:0.991189427312775 = 3; 1.0000000:15.8000000 = 4", as.factor = T)
-proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.991189427312775 = 3", as.factor = T) # 1= Baja representacion, 2= Mediana representacion, 3= Alta representacion y 4= Sobre representacion
+proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.00074212604268709: 0.3 = 1; 0.300813008130081:0.5 = 2; 0.500833333333333: 15.8 = 3", as.factor = T)
+proc_ohl$representatividad <- car::recode(proc_ohl$representatividad, "0.00074212604268709 = 1", as.factor = T) # 1= Baja representacion, 2= Mediana representacion, 3= Alta representacion 
+proc_ohl$representatividad<-factor(proc_ohl$representatividad,levels=c(1,2,3),labels=c("1","2","3"))
 
-# 4.2. Variable trabajadores comprometidos ----
+# 4.2. Variable trabajadores comprometidos 
 proc_ohl$trab_comprometidos <- as.numeric(proc_ohl$trab_comprometidos)
-proc_ohl$trab_comprometidos <- car::recode(proc_ohl$trab_comprometidos, "1:100 = 1; 101:750 = 2; 755:9673 = 3; 10000:500000 = 4", as.factor = T) #1 = Baja cantidad TC, 2 = Mediana Cantidad TC, 3 = Alta Cantidad TC y 4 = Muy Alta Cantidad TC
+freq(proc_ohl$trab_comprometidos)
+proc_ohl$trab_comprometidos <- car::recode(proc_ohl$trab_comprometidos, "1:100 = 1; 101:800 = 2; 850:500000 = 3", as.factor = T) #1 = Baja cantidad TC, 2 = Mediana Cantidad TC, 3 = Alta Cantidad TC 
 summary(proc_ohl$trab_comprometidos)
 
   
