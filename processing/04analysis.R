@@ -128,49 +128,49 @@ k <-cbind(a1, a2, a3, a4, a5, a6, a7, a8)~1
 # 6.1. Año 2016 
 M1<-poLCA(formula = f, data = ohl_2016, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
 M2<-poLCA(formula = f, data = ohl_2016, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
-M3<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F) # este
-M4<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 2, na.rm = F)# nrep = 1 falso máximo
+M3<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F) 
+M4<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 2, na.rm = F) # # nrep = 1 falso máximo
 M5<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F)
-M6<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F)
+M6<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F) # este
 M7<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F)
 M8<-poLCA(formula = f, data = ohl_2016, nclass = 5, maxiter = 2000, nrep = 3, na.rm = F)
 M9<-poLCA(formula = f, data = ohl_2016, nclass = 6, maxiter = 2000, nrep = 3, na.rm = F)
 
-# M3 el mejor modelo con 3 clases latentes y ajuste alto/ M9 mejor modelo con 6 clases latentes y ajuste bajo
+# M6 el mejor modelo con 4 clases latentes y ajuste bajo/ M4 mejor modelo con 3 clases latentes y ajuste alto
 
 # 6.2. Año 2017
 M1_1<-poLCA(formula = t, data = ohl_2017, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
 M2_1<-poLCA(formula = t, data = ohl_2017, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
 M3_1<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
 M4_1<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 2, na.rm = F)
-M5_1<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F) # nrep = 1 falso máximo
-M6_1<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F) # este 
+M5_1<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F) # este 
+M6_1<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F)  
 M7_1<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 3, na.rm = F)
 M8_1<-poLCA(formula = t, data = ohl_2017, nclass = 5, maxiter = 16000, nrep = 3, na.rm = F)
 M9_1<-poLCA(formula = t, data = ohl_2017, nclass = 6, maxiter = 16000, nrep = 3, na.rm = F)
 
-# M6_1 es el que mejor ajusta con 4 clases latentes/ M8_1 ajusta bien pero con 5 clases latentes
+# M5_1 mejor modelo con ajuste con 3 clases latentes
 
 # 6.3. Año 2018 
 M1_2<-poLCA(formula = r, data = ohl_2018, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
 M2_2<-poLCA(formula = r, data = ohl_2018, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
 M3_2<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
-M4_2<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F) # este
-M5_2<-poLCA(formula = r, data = ohl_2018, nclass = 4, maxiter = 2000, nrep = 3, na.rm = F) # nrep = 1 falso máximo
+M4_2<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F) # este / nrep = 1 falso máximo 
+M5_2<-poLCA(formula = r, data = ohl_2018, nclass = 4, maxiter = 2000, nrep = 3, na.rm = F) # este igual
 M6_2<-poLCA(formula = r, data = ohl_2018, nclass = 5, maxiter = 2000, nrep = 3, na.rm = F)
 M7_2<-poLCA(formula = r, data = ohl_2018, nclass = 6, maxiter = 2000, nrep = 3, na.rm = F)
 
-# M4_2 es el que mejor ajusta con 3 clases latentes/ M6_2 ajusta bien pero con 5 clases latentes
+# M4_2 es el que mejor ajusta con 3 clases latentes/ M5_2 ajusta bien pero con 4 clases latentes
 
 # 6.4. Acumulado 
 M1_3<-poLCA(formula = k, data = ohl_acum, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
-M2_3<-poLCA(formula = k, data = ohl_acum, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F) # este ajusta bien (mejor que los demás) pero tiene 2 clases latentes
-M3_3<-poLCA(formula = k, data = ohl_acum, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F) 
-M4_3<-poLCA(formula = k, data = ohl_acum, nclass = 3, maxiter = 16000, nrep = 3, na.rm = F) # este
-M5_3<-poLCA(formula = k, data = ohl_acum, nclass = 4, maxiter = 2000, nrep = 3, na.rm = F) # nrep = 1 falso máximo
+M2_3<-poLCA(formula = k, data = ohl_acum, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F) 
+M3_3<-poLCA(formula = k, data = ohl_acum, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F) #  
+M4_3<-poLCA(formula = k, data = ohl_acum, nclass = 3, maxiter = 16000, nrep = 3, na.rm = F)
+M5_3<-poLCA(formula = k, data = ohl_acum, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F) # 
 M6_3<-poLCA(formula = k, data = ohl_acum, nclass = 5, maxiter = 2000, nrep = 3, na.rm = F)
 
-# M4_3 es el que mejor ajusta con 3 clases latentes/ M6_3 ajusta bien pero con 5 clases latentes
+# M3_3 es el que mejor ajusta con 3 clases latentes/ M5_3 ajusta bien pero con 4 clases latentes
 
 # ---- 7. Ajuste ---- 
 
@@ -293,22 +293,22 @@ ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
 
 # 7.4. Ajuste acumulado
 M1_3$predcell
-M4_3$predcell
-M6_3$predcell
+M3_3$predcell
+M5_3$predcell
 
 p1_3<-1-pchisq(M1_3$Chisq, M1_3$resid.df)
 p2_3<-1-pchisq(M2_3$Chisq, M2_3$resid.df)
 p3_3<-1-pchisq(M3_3$Chisq, M3_3$resid.df)
 p4_3<-1-pchisq(M4_3$Chisq, M4_3$resid.df)
-p5_3<-1-pchisq(M6_3$Chisq, M6_3$resid.df)
+p5_3<-1-pchisq(M5_3$Chisq, M5_3$resid.df)
 
-AjusteM_acum<-data.frame(c("M1", "M2", "M3", "M4", "M6"),
-                         c(M1_3$llik, M2_3$llik, M3_3$llik, M4_3$llik, M6_3$llik),
-                         c(M1_3$Chisq, M2_3$Chisq, M3_3$Chisq, M4_3$Chisq, M6_3$Chisq),
-                         c(M1_3$Gsq, M2_3$Gsq, M3_3$Gsq, M4_3$Gsq, M6_3$Gsq),
-                         c(M1_3$npar, M2_3$npar, M3_3$npar, M4_3$npar, M6_3$npar),
-                         c(M1_3$aic, M2_3$aic, M3_3$aic, M4_3$aic, M6_3$aic),
-                         c(M1_3$bic, M2_3$bic, M3_3$bic, M4_3$bic, M6_3$bic),
+AjusteM_acum<-data.frame(c("M1", "M2", "M3", "M4", "M5"),
+                         c(M1_3$llik, M2_3$llik, M3_3$llik, M4_3$llik, M5_3$llik),
+                         c(M1_3$Chisq, M2_3$Chisq, M3_3$Chisq, M4_3$Chisq, M5_3$Chisq),
+                         c(M1_3$Gsq, M2_3$Gsq, M3_3$Gsq, M4_3$Gsq, M5_3$Gsq),
+                         c(M1_3$npar, M2_3$npar, M3_3$npar, M4_3$npar, M5_3$npar),
+                         c(M1_3$aic, M2_3$aic, M3_3$aic, M4_3$aic, M5_3$aic),
+                         c(M1_3$bic, M2_3$bic, M3_3$bic, M4_3$bic, M5_3$bic),
                          c(p1_3, p2_3, p3_3, p4_3, p5_3))
 colnames(AjusteM_acum)<-c("Modelo", "Loglike", "X2", "G2", "DF", "AIC", "BIC", "P-value")
 
@@ -456,35 +456,35 @@ tab_xtab(var.row = proc_ohl_2018$sector, proc_ohl_2018$`M4_2$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
 
 #Clases latentes acumulado
-proc_ohl<-cbind(proc_ohl, M1_3$predclass, M2_3$predclass, M3_3$predclass, M4_3$predclass, M6_3$predclass)
+proc_ohl<-cbind(proc_ohl, M1_3$predclass, M2_3$predclass, M3_3$predclass, M4_3$predclass, M5_3$predclass)
 
 sapply(proc_ohl, class)
 proc_ohl$`M1_3$predclass` <- as.factor(proc_ohl$`M1_3$predclass`)
 proc_ohl$`M2_3$predclass` <- as.factor(proc_ohl$`M2_3$predclass`)
 proc_ohl$`M3_3$predclass` <- as.factor(proc_ohl$`M3_3$predclass`)
 proc_ohl$`M4_3$predclass` <- as.factor(proc_ohl$`M4_3$predclass`)
-proc_ohl$`M6_3$predclass` <- as.factor(proc_ohl$`M6_3$predclass`)
+proc_ohl$`M5_3$predclass` <- as.factor(proc_ohl$`M5_3$predclass`)
 
 freq(proc_ohl$`M1_3$predclass`)
 freq(proc_ohl$`M2_3$predclass`)
 freq(proc_ohl$`M3_3$predclass`)
 freq(proc_ohl$`M4_3$predclass`)
-freq(proc_ohl$`M6_3$predclass`)
+freq(proc_ohl$`M5_3$predclass`)
 
 ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M1_3$predclass`) #tasa sindicalización masculina
 ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M2_3$predclass`)
 ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M3_3$predclass`)
 ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M4_3$predclass`)
-ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M6_3$predclass`)
+ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M5_3$predclass`)
 
 ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M1_3$predclass`) #tasa sindicalización femenina
 ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M2_3$predclass`)
 ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M3_3$predclass`)
 ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M4_3$predclass`)
-ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M6_3$predclass`)
+ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M5_3$predclass`)
 
-ctable(proc_ohl$sector, proc_ohl$`M4_3$predclass`)
-ctable(proc_ohl$tactica, proc_ohl$`M4_3$predclass`)
-tab_xtab(var.row = proc_ohl$sector, proc_ohl$`M4_3$predclass`,
+ctable(proc_ohl$sector, proc_ohl$`M3_3$predclass`)
+ctable(proc_ohl$tactica, proc_ohl$`M3_3$predclass`)
+tab_xtab(var.row = proc_ohl$sector, proc_ohl$`M3_3$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
 # ---- 8. Export ----
