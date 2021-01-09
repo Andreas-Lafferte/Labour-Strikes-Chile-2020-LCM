@@ -331,12 +331,6 @@ ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
         plot.caption = element_text(size=8)) 
 
 # Descripción de clases latentes
-base2<-cbind(base2, M2$predclass, M3$predclass, M4$predclass)
-
-freq(base2$`M3$predclass`)
-
-ctable(base2$sexo, base2$`M4$predclass`)
-ctable(base2$nacionalidad, base2$`M4$predclass`)
 
 # Clases Latentes Año 2016
 ohl_2016<-cbind(ohl_2016, M1$predclass, M2$predclass, M3$predclass, M7$predclass, M9$predclass)
