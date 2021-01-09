@@ -205,7 +205,7 @@ plotdatos2 <- plotdatos[plotdatos$X2=="2",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
   geom_point() + geom_line() + theme_classic() + 
-  labs(title = "Gráfico 1. Predicciones de clase año 2016",
+  labs(title = "Gráfico 4. Predicciones de clase año 2016",
        x="Variables",
        y = "Valores",
        caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
@@ -244,7 +244,7 @@ plotdatos2 <- plotdatos[plotdatos$X2=="2",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, color = X1)) +
   geom_point() + geom_line() + theme_classic() + 
-  labs(title = "Gráfico 2. Predicciones de clase año 2017",
+  labs(title = "Gráfico 4. Predicciones de clase año 2017",
        x="Variables",
        y = "Valores",
        caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
@@ -283,7 +283,7 @@ plotdatos2 <- plotdatos[plotdatos$X2=="1",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
   geom_point() + geom_line() + theme_classic() + 
-  labs(title = "Gráfico 3. Predicciones de clase año 2018",
+  labs(title = "Gráfico 6. Predicciones de clase año 2018",
        x="Variables",
        y = "Valores",
        caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
@@ -336,7 +336,7 @@ plotdatos2 <- plotdatos[plotdatos$X2=="2",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
   geom_point() + geom_line() + theme_classic() + 
-  labs(title = "Gráfico 1. Predicciones de clase 2016 a 2018",
+  labs(title = "Gráfico 2. Predicciones de clase 2016 a 2018",
        x="Variables",
        y = "Valores",
        caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
@@ -350,7 +350,7 @@ plotdatos2 <- plotdatos[plotdatos$X2=="3",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
   geom_point() + geom_line() + theme_classic() + 
-  labs(title = "Gráfico 1. Predicciones de clase 2016 a 2018",
+  labs(title = "Gráfico 3. Predicciones de clase 2016 a 2018",
        x="Variables",
        y = "Valores",
        caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
