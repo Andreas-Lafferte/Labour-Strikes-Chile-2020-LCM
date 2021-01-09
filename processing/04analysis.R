@@ -164,7 +164,7 @@ M7_2<-poLCA(formula = r, data = ohl_2018, nclass = 6, maxiter = 2000, nrep = 3, 
 
 # 6.4. Acumulado 
 M1_3<-poLCA(formula = k, data = ohl_acum, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
-M2_3<-poLCA(formula = k, data = ohl_acum, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
+M2_3<-poLCA(formula = k, data = ohl_acum, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F) # este ajusta bien (mejor que los demás) pero tiene 2 clases latentes
 M3_3<-poLCA(formula = k, data = ohl_acum, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F) 
 M4_3<-poLCA(formula = k, data = ohl_acum, nclass = 3, maxiter = 16000, nrep = 3, na.rm = F) # este
 M5_3<-poLCA(formula = k, data = ohl_acum, nclass = 4, maxiter = 2000, nrep = 3, na.rm = F) # nrep = 1 falso máximo
@@ -205,7 +205,7 @@ plotdatos2 <- plotdatos[plotdatos$X2=="2",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
   geom_point() + geom_line() + theme_classic() + 
-  labs(title = "Gráfico 1. Predicciones de clase año 2016.",
+  labs(title = "Gráfico 1. Predicciones de clase año 2016",
        x="Variables",
        y = "Valores",
        caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
@@ -242,15 +242,15 @@ plotdatos <- melt(M6_1$probs) # función de reshape que me permite 'dar vuelta' 
 plotdatos2 <- plotdatos[plotdatos$X2=="2",]
 # el probs son las probabilidades condicionales 
 
-ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
+ggplot(plotdatos2, aes(x=L1, y = value, group = X1, color = X1)) +
   geom_point() + geom_line() + theme_classic() + 
-  labs(title = "Gráfico 1. Predicciones de clase año 2017",
+  labs(title = "Gráfico 2. Predicciones de clase año 2017",
        x="Variables",
        y = "Valores",
        caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
   theme(legend.position = "bottom",plot.title = element_text(size=12),
         plot.subtitle = element_text(size=10),
-        plot.caption = element_text(size=8)) 
+        plot.caption = element_text(size=8))                              
 
 # 7.3. Ajuste año 2018 
 M1_2$predcell
@@ -278,12 +278,12 @@ View(AjusteM_2018)
 # Gráfico año 2018
 
 plotdatos <- melt(M4_2$probs) # función de reshape que me permite 'dar vuelta' una tabla
-plotdatos2 <- plotdatos[plotdatos$X2=="2",]
+plotdatos2 <- plotdatos[plotdatos$X2=="1",]
 # el probs son las probabilidades condicionales 
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
   geom_point() + geom_line() + theme_classic() + 
-  labs(title = "Gráfico 1. Predicciones de clase año 2018",
+  labs(title = "Gráfico 3. Predicciones de clase año 2018",
        x="Variables",
        y = "Valores",
        caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
@@ -316,9 +316,37 @@ View(AjusteM_acum)
 
 # Gráfico acumulado
 
-plotdatos <- melt(M4_3$probs) # función de reshape que me permite 'dar vuelta' una tabla
+# Con Pr(1)
+plotdatos <- melt(M4_3$probs) 
+plotdatos2 <- plotdatos[plotdatos$X2=="1",]
+
+ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
+  geom_point() + geom_line() + theme_classic() + 
+  labs(title = "Gráfico 1. Predicciones de clase 2016 a 2018",
+       x="Variables",
+       y = "Valores",
+       caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
+  theme(legend.position = "bottom",plot.title = element_text(size=12),
+        plot.subtitle = element_text(size=10),
+        plot.caption = element_text(size=8)) 
+
+# Con Pr(2)
+plotdatos <- melt(M4_3$probs) 
 plotdatos2 <- plotdatos[plotdatos$X2=="2",]
-# el probs son las probabilidades condicionales 
+
+ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
+  geom_point() + geom_line() + theme_classic() + 
+  labs(title = "Gráfico 1. Predicciones de clase 2016 a 2018",
+       x="Variables",
+       y = "Valores",
+       caption = "Fuente: Elaboración propia con base en datos de huelgas laborales OHL-COES (1979-2018)") + 
+  theme(legend.position = "bottom",plot.title = element_text(size=12),
+        plot.subtitle = element_text(size=10),
+        plot.caption = element_text(size=8)) 
+
+# Con Pr(3)
+plotdatos <- melt(M4_3$probs) 
+plotdatos2 <- plotdatos[plotdatos$X2=="3",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
   geom_point() + geom_line() + theme_classic() + 
@@ -332,88 +360,131 @@ ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
 
 # Descripción de clases latentes
 
-# Clases Latentes Año 2016
-ohl_2016<-cbind(ohl_2016, M1$predclass, M2$predclass, M3$predclass, M7$predclass, M9$predclass)
+# Clases latentes año 2016
+proc_ohl_2016<-cbind(proc_ohl_2016, M1$predclass, M2$predclass, M3$predclass, M7$predclass, M9$predclass)
 
-freq(ohl_2016$`M1$predclass`)
-freq(ohl_2016$`M2$predclass`)
-freq(ohl_2016$`M3$predclass`)
-freq(ohl_2016$`M7$predclass`)
-freq(ohl_2016$`M9$predclass`)
+sapply(proc_ohl_2016, class)
+proc_ohl_2016$`M1$predclass` <- as.factor(proc_ohl_2016$`M1$predclass`)
+proc_ohl_2016$`M2$predclass` <- as.factor(proc_ohl_2016$`M2$predclass`)
+proc_ohl_2016$`M3$predclass` <- as.factor(proc_ohl_2016$`M3$predclass`)
+proc_ohl_2016$`M7$predclass` <- as.factor(proc_ohl_2016$`M7$predclass`)
+proc_ohl_2016$`M9$predclass` <- as.factor(proc_ohl_2016$`M9$predclass`)
 
-ctable(ohl_2016$x7, ohl_2016$`M1$predclass`) #tasa sindicalización masculina
-ctable(ohl_2016$x7, ohl_2016$`M2$predclass`)
-ctable(ohl_2016$x7, ohl_2016$`M3$predclass`)
-ctable(ohl_2016$x7, ohl_2016$`M7$predclass`)
-ctable(ohl_2016$x7, ohl_2016$`M9$predclass`)
+freq(proc_ohl_2016$`M1$predclass`)
+freq(proc_ohl_2016$`M2$predclass`)
+freq(proc_ohl_2016$`M3$predclass`)
+freq(proc_ohl_2016$`M7$predclass`)
+freq(proc_ohl_2016$`M9$predclass`)
 
-ctable(ohl_2016$x8, ohl_2016$`M1$predclass`) #tasa sindicalización femenina
-ctable(ohl_2016$x8, ohl_2016$`M2$predclass`)
-ctable(ohl_2016$x8, ohl_2016$`M3$predclass`)
-ctable(ohl_2016$x8, ohl_2016$`M7$predclass`)
-ctable(ohl_2016$x8, ohl_2016$`M9$predclass`)
+ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M1$predclass`) #tasa sindicalización masculina
+ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M2$predclass`)
+ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M3$predclass`)
+ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M7$predclass`)
+ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M9$predclass`)
 
-#Clases Latentes Año 2017
+ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M1$predclass`) #tasa sindicalización femenina
+ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M2$predclass`)
+ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M3$predclass`)
+ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M7$predclass`)
+ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M9$predclass`)
 
-ohl_2017<-cbind(ohl_2017, M1_1$predclass, M3_1$predclass, M6_1$predclass, M8_1$predclass)
+ctable(proc_ohl_2016$sector, proc_ohl_2016$`M3$predclass`)
+ctable(proc_ohl_2016$tactica, proc_ohl_2016$`M3$predclass`)
+tab_xtab(var.row = proc_ohl_2016$sector, proc_ohl_2016$`M3$predclass`,
+         show.cell.prc = T,show.summary = F, show.na = F)
 
-freq(ohl_2017$`M1_1$predclass`)
-freq(ohl_2017$`M3_1$predclass`)
-freq(ohl_2017$`M6_1$predclass`)
-freq(ohl_2017$`M8_1$predclass`)
+#Clases latentes año 2017
+proc_ohl_2017<-cbind(proc_ohl_2017, M1_1$predclass, M3_1$predclass, M6_1$predclass, M8_1$predclass)
 
-ctable(ohl_2017$y7, ohl_2017$`M1_1$predclass`) #tasa sindicalización masculina
-ctable(ohl_2017$y7, ohl_2017$`M3_1$predclass`)
-ctable(ohl_2017$y7, ohl_2017$`M6_1$predclass`)
-ctable(ohl_2017$y7, ohl_2017$`M8_1$predclass`)
+sapply(proc_ohl_2016, class)
+proc_ohl_2017$`M1_1$predclass` <- as.factor(proc_ohl_2017$`M1_1$predclass`)
+proc_ohl_2017$`M3_1$predclass` <- as.factor(proc_ohl_2017$`M3_1$predclass`)
+proc_ohl_2017$`M6_1$predclass` <- as.factor(proc_ohl_2017$`M6_1$predclass`)
+proc_ohl_2017$`M8_1$predclass` <- as.factor(proc_ohl_2017$`M8_1$predclass`)
 
-ctable(ohl_2017$y8, ohl_2017$`M1_1$predclass`) #tasa sindicalización femenina
-ctable(ohl_2017$y8, ohl_2017$`M3_1$predclass`)
-ctable(ohl_2017$y8, ohl_2017$`M6_1$predclass`)
-ctable(ohl_2017$y8, ohl_2017$`M8_1$predclass`)
+freq(proc_ohl_2017$`M1_1$predclass`)
+freq(proc_ohl_2017$`M3_1$predclass`)
+freq(proc_ohl_2017$`M6_1$predclass`)
+freq(proc_ohl_2017$`M8_1$predclass`)
 
-#Clases Latentes Año 2018
+ctable(proc_ohl_2017$tasa_sind_homb_2017, proc_ohl_2017$`M1_1$predclass`) #tasa sindicalización masculina
+ctable(proc_ohl_2017$tasa_sind_homb_2017, proc_ohl_2017$`M3_1$predclass`)
+ctable(proc_ohl_2017$tasa_sind_homb_2017, proc_ohl_2017$`M6_1$predclass`)
+ctable(proc_ohl_2017$tasa_sind_homb_2017, proc_ohl_2017$`M8_1$predclass`)
 
-ohl_2018<-cbind(ohl_2018, M1_2$predclass, M2_2$predclass, M3_2$predclass, M4_2$predclass, M6_2$predclass)
+ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M1_1$predclass`) #tasa sindicalización femenina
+ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M3_1$predclass`)
+ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M6_1$predclass`)
+ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M8_1$predclass`)
 
-freq(ohl_2018$`M1_2$predclass`)
-freq(ohl_2018$`M2_2$predclass`)
-freq(ohl_2018$`M3_2$predclass`)
-freq(ohl_2018$`M4_2$predclass`)
-freq(ohl_2018$`M6_2$predclass`)
+ctable(proc_ohl_2017$sector, proc_ohl_2017$`M6_1$predclass`)
+ctable(proc_ohl_2017$tactica, proc_ohl_2017$`M6_1$predclass`)
+tab_xtab(var.row = proc_ohl_2017$sector, proc_ohl_2017$`M6_1$predclass`,
+         show.cell.prc = T,show.summary = F, show.na = F)
 
-ctable(ohl_2018$z7, ohl_2018$`M1_2$predclass`) #tasa sindicalización masculina
-ctable(ohl_2018$z7, ohl_2018$`M2_2$predclass`)
-ctable(ohl_2018$z7, ohl_2018$`M3_2$predclass`)
-ctable(ohl_2018$z7, ohl_2018$`M4_2$predclass`)
-ctable(ohl_2018$z7, ohl_2018$`M6_2$predclass`)
+#Clases latentes año 2018
+proc_ohl_2018<-cbind(proc_ohl_2018, M1_2$predclass, M2_2$predclass, M3_2$predclass, M4_2$predclass, M6_2$predclass)
 
-ctable(ohl_2018$z8, ohl_2018$`M1_2$predclass`) #tasa sindicalización femenina
-ctable(ohl_2018$z8, ohl_2018$`M2_2$predclass`)
-ctable(ohl_2018$z8, ohl_2018$`M3_2$predclass`)
-ctable(ohl_2018$z8, ohl_2018$`M4_2$predclass`)
-ctable(ohl_2018$z8, ohl_2018$`M6_2$predclass`)
+sapply(proc_ohl_2018, class)
+proc_ohl_2018$`M1_2$predclass` <- as.factor(proc_ohl_2018$`M1_2$predclass`)
+proc_ohl_2018$`M2_2$predclass` <- as.factor(proc_ohl_2018$`M2_2$predclass`)
+proc_ohl_2018$`M3_2$predclass` <- as.factor(proc_ohl_2018$`M3_2$predclass`)
+proc_ohl_2018$`M4_2$predclass` <- as.factor(proc_ohl_2018$`M4_2$predclass`)
+proc_ohl_2018$`M6_2$predclass` <- as.factor(proc_ohl_2018$`M6_2$predclass`)
 
-#Clases Latentes Acumulado
+freq(proc_ohl_2018$`M1_2$predclass`)
+freq(proc_ohl_2018$`M2_2$predclass`)
+freq(proc_ohl_2018$`M3_2$predclass`)
+freq(proc_ohl_2018$`M4_2$predclass`)
+freq(proc_ohl_2018$`M6_2$predclass`)
 
-ohl_acum<-cbind(ohl_acum, M1_3$predclass, M2_3$predclass, M3_3$predclass, M4_3$predclass, M6_3$predclass)
+ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M1_2$predclass`) #tasa sindicalización masculina
+ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M2_2$predclass`)
+ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M3_2$predclass`)
+ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M4_2$predclass`)
+ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M6_2$predclass`)
 
-freq(ohl_acum$`M1_3$predclass`)
-freq(ohl_acum$`M2_3$predclass`)
-freq(ohl_acum$`M3_3$predclass`)
-freq(ohl_acum$`M4_3$predclass`)
-freq(ohl_acum$`M6_3$predclass`)
+ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M1_2$predclass`) #tasa sindicalización femenina
+ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M2_2$predclass`)
+ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M3_2$predclass`)
+ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M4_2$predclass`)
+ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M6_2$predclass`)
 
-ctable(ohl_acum$a7, ohl_acum$`M1_3$predclass`) #tasa sindicalización masculina
-ctable(ohl_acum$a7, ohl_acum$`M2_3$predclass`)
-ctable(ohl_acum$a7, ohl_acum$`M3_3$predclass`)
-ctable(ohl_acum$a7, ohl_acum$`M4_3$predclass`)
-ctable(ohl_acum$a7, ohl_acum$`M6_3$predclass`)
+ctable(proc_ohl_2018$sector, proc_ohl_2018$`M4_2$predclass`)
+ctable(proc_ohl_2018$tactica, proc_ohl_2018$`M4_2$predclass`)
+tab_xtab(var.row = proc_ohl_2018$sector, proc_ohl_2018$`M4_2$predclass`,
+         show.cell.prc = T,show.summary = F, show.na = F)
 
-ctable(ohl_acum$a8, ohl_acum$`M1_3$predclass`) #tasa sindicalización femenina
-ctable(ohl_acum$a8, ohl_acum$`M2_3$predclass`)
-ctable(ohl_acum$a8, ohl_acum$`M3_3$predclass`)
-ctable(ohl_acum$a8, ohl_acum$`M4_3$predclass`)
-ctable(ohl_acum$a8, ohl_acum$`M6_3$predclass`)
+#Clases latentes acumulado
+proc_ohl<-cbind(proc_ohl, M1_3$predclass, M2_3$predclass, M3_3$predclass, M4_3$predclass, M6_3$predclass)
 
+sapply(proc_ohl, class)
+proc_ohl$`M1_3$predclass` <- as.factor(proc_ohl$`M1_3$predclass`)
+proc_ohl$`M2_3$predclass` <- as.factor(proc_ohl$`M2_3$predclass`)
+proc_ohl$`M3_3$predclass` <- as.factor(proc_ohl$`M3_3$predclass`)
+proc_ohl$`M4_3$predclass` <- as.factor(proc_ohl$`M4_3$predclass`)
+proc_ohl$`M6_3$predclass` <- as.factor(proc_ohl$`M6_3$predclass`)
+
+freq(proc_ohl$`M1_3$predclass`)
+freq(proc_ohl$`M2_3$predclass`)
+freq(proc_ohl$`M3_3$predclass`)
+freq(proc_ohl$`M4_3$predclass`)
+freq(proc_ohl$`M6_3$predclass`)
+
+ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M1_3$predclass`) #tasa sindicalización masculina
+ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M2_3$predclass`)
+ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M3_3$predclass`)
+ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M4_3$predclass`)
+ctable(proc_ohl$tasa_sind_homb_acum, proc_ohl$`M6_3$predclass`)
+
+ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M1_3$predclass`) #tasa sindicalización femenina
+ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M2_3$predclass`)
+ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M3_3$predclass`)
+ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M4_3$predclass`)
+ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M6_3$predclass`)
+
+ctable(proc_ohl$sector, proc_ohl$`M4_3$predclass`)
+ctable(proc_ohl$tactica, proc_ohl$`M4_3$predclass`)
+tab_xtab(var.row = proc_ohl$sector, proc_ohl$`M4_3$predclass`,
+         show.cell.prc = T,show.summary = F, show.na = F)
 # ---- 8. Export ----
