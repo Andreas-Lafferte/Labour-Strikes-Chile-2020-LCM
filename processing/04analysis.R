@@ -21,17 +21,17 @@ print(summarytools::dfSummary(proc_ohl_2018),  method="viewer")
 # ---- 4. Analisis bivariado ---- 
 tab_xtab(var.row = proc_ohl$rango_empresa_imp, proc_ohl$sector,
                show.cell.prc = T,show.summary = F, show.na = F)
-table(proc_ohl$rango_empresa_imp, proc_ohl$sector, useNA = "always")
+table(proc_ohl$rango_empresa_imp, proc_ohl$sector, useNA = "always") #poder estructural
 
 tab_xtab(var.row = proc_ohl$pibxtrab_acum, proc_ohl$rango_empresa_imp, 
-         show.cell.prc = T,show.summary = F, show.na = F)
+         show.cell.prc = T,show.summary = F, show.na = F) #poder estructural
 
 tab_xtab(var.row = proc_ohl$organizacion, proc_ohl$representatividad, 
-         show.cell.prc = T,show.summary = F, show.na = T)
+         show.cell.prc = T,show.summary = F, show.na = T) #poder asociativo
 
 tab_xtab(var.row = proc_ohl$tactica, proc_ohl$trab_comprometidos, 
          show.cell.prc = T,show.summary = F, show.na = T)
-table(proc_ohl$tactica, proc_ohl$trab_comprometidos, useNA = "always")
+table(proc_ohl$tactica, proc_ohl$trab_comprometidos, useNA = "always") #poder de movilización
 
 # ---- 5. Matriz ---- 
 
@@ -329,5 +329,97 @@ ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
   theme(legend.position = "bottom",plot.title = element_text(size=12),
         plot.subtitle = element_text(size=10),
         plot.caption = element_text(size=8)) 
+
+# Descripción de clases latentes
+base2<-cbind(base2, M2$predclass, M3$predclass, M4$predclass)
+
+freq(base2$`M3$predclass`)
+
+ctable(base2$sexo, base2$`M4$predclass`)
+ctable(base2$nacionalidad, base2$`M4$predclass`)
+
+# Clases Latentes Año 2016
+ohl_2016<-cbind(ohl_2016, M1$predclass, M2$predclass, M3$predclass, M7$predclass, M9$predclass)
+
+freq(ohl_2016$`M1$predclass`)
+freq(ohl_2016$`M2$predclass`)
+freq(ohl_2016$`M3$predclass`)
+freq(ohl_2016$`M7$predclass`)
+freq(ohl_2016$`M9$predclass`)
+
+ctable(ohl_2016$x7, ohl_2016$`M1$predclass`) #tasa sindicalización masculina
+ctable(ohl_2016$x7, ohl_2016$`M2$predclass`)
+ctable(ohl_2016$x7, ohl_2016$`M3$predclass`)
+ctable(ohl_2016$x7, ohl_2016$`M7$predclass`)
+ctable(ohl_2016$x7, ohl_2016$`M9$predclass`)
+
+ctable(ohl_2016$x8, ohl_2016$`M1$predclass`) #tasa sindicalización femenina
+ctable(ohl_2016$x8, ohl_2016$`M2$predclass`)
+ctable(ohl_2016$x8, ohl_2016$`M3$predclass`)
+ctable(ohl_2016$x8, ohl_2016$`M7$predclass`)
+ctable(ohl_2016$x8, ohl_2016$`M9$predclass`)
+
+#Clases Latentes Año 2017
+
+ohl_2017<-cbind(ohl_2017, M1_1$predclass, M3_1$predclass, M6_1$predclass, M8_1$predclass)
+
+freq(ohl_2017$`M1_1$predclass`)
+freq(ohl_2017$`M3_1$predclass`)
+freq(ohl_2017$`M6_1$predclass`)
+freq(ohl_2017$`M8_1$predclass`)
+
+ctable(ohl_2017$y7, ohl_2017$`M1_1$predclass`) #tasa sindicalización masculina
+ctable(ohl_2017$y7, ohl_2017$`M3_1$predclass`)
+ctable(ohl_2017$y7, ohl_2017$`M6_1$predclass`)
+ctable(ohl_2017$y7, ohl_2017$`M8_1$predclass`)
+
+ctable(ohl_2017$y8, ohl_2017$`M1_1$predclass`) #tasa sindicalización femenina
+ctable(ohl_2017$y8, ohl_2017$`M3_1$predclass`)
+ctable(ohl_2017$y8, ohl_2017$`M6_1$predclass`)
+ctable(ohl_2017$y8, ohl_2017$`M8_1$predclass`)
+
+#Clases Latentes Año 2018
+
+ohl_2018<-cbind(ohl_2018, M1_2$predclass, M2_2$predclass, M3_2$predclass, M4_2$predclass, M6_2$predclass)
+
+freq(ohl_2018$`M1_2$predclass`)
+freq(ohl_2018$`M2_2$predclass`)
+freq(ohl_2018$`M3_2$predclass`)
+freq(ohl_2018$`M4_2$predclass`)
+freq(ohl_2018$`M6_2$predclass`)
+
+ctable(ohl_2018$z7, ohl_2018$`M1_2$predclass`) #tasa sindicalización masculina
+ctable(ohl_2018$z7, ohl_2018$`M2_2$predclass`)
+ctable(ohl_2018$z7, ohl_2018$`M3_2$predclass`)
+ctable(ohl_2018$z7, ohl_2018$`M4_2$predclass`)
+ctable(ohl_2018$z7, ohl_2018$`M6_2$predclass`)
+
+ctable(ohl_2018$z8, ohl_2018$`M1_2$predclass`) #tasa sindicalización femenina
+ctable(ohl_2018$z8, ohl_2018$`M2_2$predclass`)
+ctable(ohl_2018$z8, ohl_2018$`M3_2$predclass`)
+ctable(ohl_2018$z8, ohl_2018$`M4_2$predclass`)
+ctable(ohl_2018$z8, ohl_2018$`M6_2$predclass`)
+
+#Clases Latentes Acumulado
+
+ohl_acum<-cbind(ohl_acum, M1_3$predclass, M2_3$predclass, M3_3$predclass, M4_3$predclass, M6_3$predclass)
+
+freq(ohl_acum$`M1_3$predclass`)
+freq(ohl_acum$`M2_3$predclass`)
+freq(ohl_acum$`M3_3$predclass`)
+freq(ohl_acum$`M4_3$predclass`)
+freq(ohl_acum$`M6_3$predclass`)
+
+ctable(ohl_acum$a7, ohl_acum$`M1_3$predclass`) #tasa sindicalización masculina
+ctable(ohl_acum$a7, ohl_acum$`M2_3$predclass`)
+ctable(ohl_acum$a7, ohl_acum$`M3_3$predclass`)
+ctable(ohl_acum$a7, ohl_acum$`M4_3$predclass`)
+ctable(ohl_acum$a7, ohl_acum$`M6_3$predclass`)
+
+ctable(ohl_acum$a8, ohl_acum$`M1_3$predclass`) #tasa sindicalización femenina
+ctable(ohl_acum$a8, ohl_acum$`M2_3$predclass`)
+ctable(ohl_acum$a8, ohl_acum$`M3_3$predclass`)
+ctable(ohl_acum$a8, ohl_acum$`M4_3$predclass`)
+ctable(ohl_acum$a8, ohl_acum$`M6_3$predclass`)
 
 # ---- 8. Export ----
