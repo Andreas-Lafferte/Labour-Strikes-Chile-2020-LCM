@@ -99,7 +99,7 @@ freq(proc_ohl$autoridad)
 sjmisc::descr(proc_ohl) # tot_trabajadores tiene un 49% de NA´s y rango_empresa un 46% de NA´s
 
 # ---- 4. Re-Codification ----
-proc_ohl$organizacion <- car::recode(proc_ohl$organizacion,"0 = 1; c(1,2,3) = 2; 4 = 3; 5 = 2; c(6,7) = 3; 8 = 2; 9 = 1; 10 = 1; 11 = 2; NA = NA", as.factor = T) #  1=Ausencia, 2=Sindicato empresa, 3= Suprasindical
+proc_ohl$organizacion <- car::recode(proc_ohl$organizacion,"0 = 1; c(1,2,3) = 2; 4 = 2; 5 = 2; c(6,7) = 2; 8 = 2; 9 = 1; 10 = 1; 11 = 2; NA = NA", as.factor = T) #  1=Ausencia sindicato, 2= Presencia sindicato
 proc_ohl$legalidad <- car::recode(proc_ohl$legalidad,"1 = 1; 2 = 2", as.factor = T) #1=Legal 2=Extralegal
 proc_ohl$tactica <- car::recode(proc_ohl$tactica,"c(1,2,3,4) = 1; c(5,6,7) = 1; 8 = 1; c(9,10) = 1; c(11,12) = 1; c(13,14) = 1;
                                 15 = 1; c(16,17) = 1; c(18,19,20,21,22,23,24) = 2; c(25,26,27,28,29,30,31,32,33) = 3;
@@ -260,32 +260,31 @@ proc_ohl$tasa_sind_muj_2018 <- car::recode(proc_ohl$tasa_sind_muj_2018, "0.03241
 proc_ohl$tasa_sind_muj_acum <- car::recode(proc_ohl$tasa_sind_muj_acum, "0.0295111757956337:0.0987883278725658 = 1; 0.100979926113027:0.218146854917988 = 2; 0.390793315360374:0.421244940450385 = 3", as.factor = T)
 proc_ohl$tasa_sind_muj_acum <- car::recode(proc_ohl$tasa_sind_muj_acum, "0.0295111757956337 = 1; 0.218146854917988 = 2; 0.421244940450385 = 3", as.factor = T)
 
-proc_ohl <- proc_ohl[-c(17,18,19,20,21,22,27,28,29,30,31,32)]
+proc_ohl <- proc_ohl[-c(9,12,17,18,19,20,21,22,27,28,29,30,31,32)]
 
 # ---- 7. Data por año y agregado ---- 
 proc_ohl_2016 <- proc_ohl %>% filter(ano==2016)%>%as.data.frame()
 proc_ohl_2017 <- proc_ohl %>% filter(ano==2017)%>%as.data.frame()
 proc_ohl_2018 <- proc_ohl %>% filter(ano==2018)%>%as.data.frame()
  
-proc_ohl_2016 <- proc_ohl_2016[-c(14,15,18,19,22,23)]
-proc_ohl_2017 <- proc_ohl_2017[-c(13,15,17,19,21,23)]
-proc_ohl_2018 <- proc_ohl_2018[-c(13,14,17,18,21,22)]
+proc_ohl_2016 <- proc_ohl_2016[-c(12,13,16,17,20,21)]
+proc_ohl_2017 <- proc_ohl_2017[-c(11,13,15,17,19,21)]
+proc_ohl_2018 <- proc_ohl_2018[-c(11,12,15,16,19,20)]
 
 sapply(proc_ohl, class)
 proc_ohl$sector <- as.factor(proc_ohl$sector)
-proc_ohl$autoridad <- as.factor(proc_ohl$autoridad)
+
 
 sapply(proc_ohl_2016, class)
 proc_ohl_2016$sector <- as.factor(proc_ohl_2016$sector)
-proc_ohl_2016$autoridad <- as.factor(proc_ohl_2016$autoridad)
+
 
 sapply(proc_ohl_2017, class)
 proc_ohl_2017$sector <- as.factor(proc_ohl_2017$sector)
-proc_ohl_2017$autoridad <- as.factor(proc_ohl_2017$autoridad)
+
 
 sapply(proc_ohl_2018, class)
 proc_ohl_2018$sector <- as.factor(proc_ohl_2018$sector)
-proc_ohl_2018$autoridad <- as.factor(proc_ohl_2018$autoridad)
 
 # ---- 8. Export ---- 
 save(proc_ohl, file= "data/proc-ohl.RData")
