@@ -209,21 +209,21 @@ k <-cbind(a1, a2, a3, a4, a5, a6, a7, a8)~1
 M1<-poLCA(formula = f, data = ohl_2016, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
 M2<-poLCA(formula = f, data = ohl_2016, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
 M3<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F) 
-M4<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 2, na.rm = F) # # nrep = 1 falso máximo
-M5<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F)
-M6<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F) # este
+M4<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 2, na.rm = F) # nrep = 1 falso máximo
+M5<-poLCA(formula = f, data = ohl_2016, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F) # este
+M6<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F) 
 M7<-poLCA(formula = f, data = ohl_2016, nclass = 4, maxiter = 2000, nrep = 5, na.rm = F)
 M8<-poLCA(formula = f, data = ohl_2016, nclass = 5, maxiter = 2000, nrep = 3, na.rm = F)
 M9<-poLCA(formula = f, data = ohl_2016, nclass = 6, maxiter = 2000, nrep = 3, na.rm = F)
 
-# M6 el mejor modelo con 4 clases latentes y ajuste bajo/ M4 mejor modelo con 3 clases latentes y ajuste alto
+# M6 el mejor modelo con 4 clases latentes y ajuste bajo/ M5 mejor modelo con 3 clases latentes y ajuste alto
 
 # 6.2. Año 2017
 M1_1<-poLCA(formula = t, data = ohl_2017, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
 M2_1<-poLCA(formula = t, data = ohl_2017, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
 M3_1<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
-M4_1<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 2, na.rm = F)
-M5_1<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F) # este 
+M4_1<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 2, na.rm = F) 
+M5_1<-poLCA(formula = t, data = ohl_2017, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F)  # este
 M6_1<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 1, na.rm = F)  
 M7_1<-poLCA(formula = t, data = ohl_2017, nclass = 4, maxiter = 2000, nrep = 3, na.rm = F)
 M8_1<-poLCA(formula = t, data = ohl_2017, nclass = 5, maxiter = 16000, nrep = 3, na.rm = F)
@@ -234,8 +234,8 @@ M9_1<-poLCA(formula = t, data = ohl_2017, nclass = 6, maxiter = 16000, nrep = 3,
 # 6.3. Año 2018 
 M1_2<-poLCA(formula = r, data = ohl_2018, nclass = 1, maxiter = 2000, nrep = 1, na.rm = F)
 M2_2<-poLCA(formula = r, data = ohl_2018, nclass = 2, maxiter = 2000, nrep = 1, na.rm = F)
-M3_2<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F)
-M4_2<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F) # este / nrep = 1 falso máximo 
+M3_2<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 2000, nrep = 1, na.rm = F) # este
+M4_2<-poLCA(formula = r, data = ohl_2018, nclass = 3, maxiter = 2000, nrep = 3, na.rm = F) # nrep = 1 falso máximo 
 M5_2<-poLCA(formula = r, data = ohl_2018, nclass = 4, maxiter = 2000, nrep = 3, na.rm = F) # este igual
 M6_2<-poLCA(formula = r, data = ohl_2018, nclass = 5, maxiter = 2000, nrep = 3, na.rm = F)
 M7_2<-poLCA(formula = r, data = ohl_2018, nclass = 6, maxiter = 2000, nrep = 3, na.rm = F)
@@ -257,23 +257,23 @@ M6_3<-poLCA(formula = k, data = ohl_acum, nclass = 5, maxiter = 2000, nrep = 3, 
 # 7.1. Ajuste año 2016 
 M1$predcell
 M2$predcell
-M4$predcell
+M5$predcell
 M6$predcell
 M8$predcell
 
 p1<-1-pchisq(M1$Chisq, M1$resid.df)
 p2<-1-pchisq(M2$Chisq, M2$resid.df)
-p3<-1-pchisq(M4$Chisq, M4$resid.df)
+p3<-1-pchisq(M5$Chisq, M5$resid.df)
 p4<-1-pchisq(M6$Chisq, M7$resid.df)
 p5<-1-pchisq(M8$Chisq, M8$resid.df)
 
 AjusteM_2016<-data.frame(c("M1", "M2", "M3", "M4", "M5"),
-                         c(M1$llik, M2$llik, M4$llik, M6$llik, M8$llik),
-                         c(M1$Chisq, M2$Chisq, M4$Chisq, M6$Chisq, M8$Chisq),
-                         c(M1$Gsq, M2$Gsq, M4$Gsq, M6$Gsq, M8$Gsq),
-                         c(M1$npar, M2$npar, M4$npar, M6$npar, M8$npar),
-                         c(M1$aic, M2$aic, M4$aic, M6$aic, M8$aic),
-                         c(M1$bic, M2$bic, M4$bic, M6$bic, M8$bic),
+                         c(M1$llik, M2$llik, M5$llik, M6$llik, M8$llik),
+                         c(M1$Chisq, M2$Chisq, M5$Chisq, M6$Chisq, M8$Chisq),
+                         c(M1$Gsq, M2$Gsq, M5$Gsq, M6$Gsq, M8$Gsq),
+                         c(M1$npar, M2$npar, M5$npar, M6$npar, M8$npar),
+                         c(M1$aic, M2$aic, M5$aic, M6$aic, M8$aic),
+                         c(M1$bic, M2$bic, M5$bic, M6$bic, M8$bic),
                          c(p1, p2, p3, p4, p5))
 colnames(AjusteM_2016)<-c("Modelo", "Loglike", "X2", "G2", "DF", "AIC", "BIC", "P-value")
 
@@ -282,7 +282,7 @@ View(AjusteM_2016)
 # Gráfico año 2016 
 
 # Pr(1)
-plotdatos <- melt(M4$probs) 
+plotdatos <- melt(M5$probs) 
 plotdatos2 <- plotdatos[plotdatos$X2=="1",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
@@ -304,7 +304,7 @@ ggsave(plot = last_plot(),
        height = 20)
 
 # Pr(2)
-plotdatos <- melt(M4$probs) 
+plotdatos <- melt(M5$probs) 
 plotdatos2 <- plotdatos[plotdatos$X2=="2",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
@@ -326,7 +326,7 @@ ggsave(plot = last_plot(),
        height = 20)
 
 # Pr(3)
-plotdatos <- melt(M4$probs) 
+plotdatos <- melt(M5$probs) 
 plotdatos2 <- plotdatos[plotdatos$X2=="3",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
@@ -351,22 +351,22 @@ ggsave(plot = last_plot(),
 M1_1$predcell
 M2_1$predcell
 M5_1$predcell 
-M6_1$predcell
+M7_1$predcell
 M8_1$predcell
 
 p1_1<-1-pchisq(M1_1$Chisq, M1_1$resid.df)
 p2_1<-1-pchisq(M2_1$Chisq, M2_1$resid.df)
 p3_1<-1-pchisq(M5_1$Chisq, M5_1$resid.df)
-p4_1<-1-pchisq(M6_1$Chisq, M6_1$resid.df)
+p4_1<-1-pchisq(M7_1$Chisq, M7_1$resid.df)
 p5_1<-1-pchisq(M8_1$Chisq, M8_1$resid.df)
 
 AjusteM_2017<-data.frame(c("M1", "M2", "M3", "M4", "M5"),
-                         c(M1_1$llik, M2_1$llik, M5_1$llik, M6_1$llik, M8_1$llik),
-                         c(M1_1$Chisq, M2_1$Chisq, M5_1$Chisq, M6_1$Chisq, M8_1$Chisq),
-                         c(M1_1$Gsq, M2_1$Gsq, M5_1$Gsq, M6_1$Gsq, M8_1$Gsq),
-                         c(M1_1$npar, M2_1$npar, M5_1$npar, M6_1$npar, M8_1$npar),
-                         c(M1_1$aic, M2_1$aic, M5_1$aic, M6_1$aic, M8_1$aic),
-                         c(M1_1$bic, M2_1$bic, M5_1$bic, M6_1$bic, M8_1$bic),
+                         c(M1_1$llik, M2_1$llik, M5_1$llik, M7_1$llik, M8_1$llik),
+                         c(M1_1$Chisq, M2_1$Chisq, M5_1$Chisq, M7_1$Chisq, M8_1$Chisq),
+                         c(M1_1$Gsq, M2_1$Gsq, M5_1$Gsq, M7_1$Gsq, M8_1$Gsq),
+                         c(M1_1$npar, M2_1$npar, M5_1$npar, M7_1$npar, M8_1$npar),
+                         c(M1_1$aic, M2_1$aic, M5_1$aic, M7_1$aic, M8_1$aic),
+                         c(M1_1$bic, M2_1$bic, M5_1$bic, M7_1$bic, M8_1$bic),
                          c(p1_1, p2_1, p3_1, p4_1, p5_1))
 colnames(AjusteM_2017)<-c("Modelo", "Loglike", "X2", "G2", "DF", "AIC", "BIC", "P-value")
 
@@ -443,23 +443,23 @@ ggsave(plot = last_plot(),
 # 7.3. Ajuste año 2018 
 M1_2$predcell
 M2_2$predcell
-M4_2$predcell
+M3_2$predcell
 M5_2$predcell
 M6_2$predcell
 
 p1_2<-1-pchisq(M1_2$Chisq, M1_2$resid.df)
 p2_2<-1-pchisq(M2_2$Chisq, M2_2$resid.df)
-p3_2<-1-pchisq(M4_2$Chisq, M4_2$resid.df)
+p3_2<-1-pchisq(M3_2$Chisq, M3_2$resid.df)
 p4_2<-1-pchisq(M5_2$Chisq, M5_2$resid.df)
 p5_2<-1-pchisq(M6_2$Chisq, M6_2$resid.df)
 
 AjusteM_2018<-data.frame(c("M1", "M2", "M3", "M4", "M5"),
-                         c(M1_2$llik, M2_2$llik, M4_2$llik, M5_2$llik, M6_2$llik),
-                         c(M1_2$Chisq, M2_2$Chisq, M4_2$Chisq, M5_2$Chisq, M6_2$Chisq),
-                         c(M1_2$Gsq, M2_2$Gsq, M4_2$Gsq, M5_2$Gsq, M6_2$Gsq),
-                         c(M1_2$npar, M2_2$npar, M4_2$npar, M5_2$npar, M6_2$npar),
-                         c(M1_2$aic, M2_2$aic, M4_2$aic, M5_2$aic, M6_2$aic),
-                         c(M1_2$bic, M2_2$bic, M4_2$bic, M5_2$bic, M6_2$bic),
+                         c(M1_2$llik, M2_2$llik, M3_2$llik, M5_2$llik, M6_2$llik),
+                         c(M1_2$Chisq, M2_2$Chisq, M3_2$Chisq, M5_2$Chisq, M6_2$Chisq),
+                         c(M1_2$Gsq, M2_2$Gsq, M3_2$Gsq, M5_2$Gsq, M6_2$Gsq),
+                         c(M1_2$npar, M2_2$npar, M3_2$npar, M5_2$npar, M6_2$npar),
+                         c(M1_2$aic, M2_2$aic, M3_2$aic, M5_2$aic, M6_2$aic),
+                         c(M1_2$bic, M2_2$bic, M3_2$bic, M5_2$bic, M6_2$bic),
                          c(p1_2, p2_2, p3_2, p4_2, p5_2))
 colnames(AjusteM_2018)<-c("Modelo", "Loglike", "X2", "G2", "DF", "AIC", "BIC", "P-value")
 
@@ -468,7 +468,7 @@ View(AjusteM_2018)
 # Gráfico año 2018
 
 # Pr(1)
-plotdatos <- melt(M4_2$probs) 
+plotdatos <- melt(M3_2$probs) 
 plotdatos2 <- plotdatos[plotdatos$X2=="1",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
@@ -490,7 +490,7 @@ ggsave(plot = last_plot(),
        height = 20)
 
 # Pr(2)
-plotdatos <- melt(M4_2$probs) 
+plotdatos <- melt(M3_2$probs) 
 plotdatos2 <- plotdatos[plotdatos$X2=="2",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
@@ -512,7 +512,7 @@ ggsave(plot = last_plot(),
        height = 20)
 
 # Pr(3)
-plotdatos <- melt(M4_2$probs) 
+plotdatos <- melt(M3_2$probs) 
 plotdatos2 <- plotdatos[plotdatos$X2=="3",]
 
 ggplot(plotdatos2, aes(x=L1, y = value, group = X1, colour = X1)) +
@@ -629,78 +629,78 @@ ggsave(plot = last_plot(),
 # 6.2. Descripcion de clases latentes ----
 
 # Clases latentes año 2016
-proc_ohl_2016<-cbind(proc_ohl_2016, M1$predclass, M2$predclass, M4$predclass, M6$predclass, M8$predclass)
+proc_ohl_2016<-cbind(proc_ohl_2016, M1$predclass, M2$predclass, M5$predclass, M6$predclass, M8$predclass)
 
 sapply(proc_ohl_2016, class)
 proc_ohl_2016$`M1$predclass` <- as.factor(proc_ohl_2016$`M1$predclass`)
 proc_ohl_2016$`M2$predclass` <- as.factor(proc_ohl_2016$`M2$predclass`)
-proc_ohl_2016$`M4$predclass` <- as.factor(proc_ohl_2016$`M4$predclass`)
+proc_ohl_2016$`M5$predclass` <- as.factor(proc_ohl_2016$`M5$predclass`)
 proc_ohl_2016$`M6$predclass` <- as.factor(proc_ohl_2016$`M6$predclass`)
 proc_ohl_2016$`M8$predclass` <- as.factor(proc_ohl_2016$`M8$predclass`)
 
 freq(proc_ohl_2016$`M1$predclass`)
 freq(proc_ohl_2016$`M2$predclass`)
-freq(proc_ohl_2016$`M4$predclass`)
+freq(proc_ohl_2016$`M5$predclass`)
 freq(proc_ohl_2016$`M6$predclass`)
 freq(proc_ohl_2016$`M8$predclass`)
 
 ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M1$predclass`) #tasa sindicalización masculina
 ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M2$predclass`)
-ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M4$predclass`)
+ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M5$predclass`)
 ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M6$predclass`)
 ctable(proc_ohl_2016$tasa_sind_homb_2016, proc_ohl_2016$`M8$predclass`)
 
 ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M1$predclass`) #tasa sindicalización femenina
 ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M2$predclass`)
-ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M4$predclass`)
+ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M5$predclass`)
 ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M6$predclass`)
 ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M8$predclass`)
 
-ctable(proc_ohl_2016$sector, proc_ohl_2016$`M4$predclass`)
-ctable(proc_ohl_2016$tactica, proc_ohl_2016$`M4$predclass`)
+ctable(proc_ohl_2016$sector, proc_ohl_2016$`M5$predclass`)
+ctable(proc_ohl_2016$tactica, proc_ohl_2016$`M5$predclass`)
 
-tab_xtab(var.row = proc_ohl_2016$sector, proc_ohl_2016$`M4$predclass`,
+tab_xtab(var.row = proc_ohl_2016$sector, proc_ohl_2016$`M5$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:22383/session/file5228419e6dcf.html", file = "output/tables/sector-predclass2016.png", vwidth = 992,
+webshot(url = "http://localhost:14019/session/file1d9411ac5a46.html", file = "output/tables/sector-predclass2016.png", vwidth = 992,
         vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
         delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
         useragent = NULL)
 
-tab_xtab(var.row = proc_ohl_2016$tactica, proc_ohl_2016$`M4$predclass`,
+tab_xtab(var.row = proc_ohl_2016$tactica, proc_ohl_2016$`M5$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:22383/session/file522877f5935.html", file = "output/tables/tactica-predclass2016.png", vwidth = 992,
+webshot(url = "http://localhost:14019/session/file1d941af47d6f.html", file = "output/tables/tactica-predclass2016.png", vwidth = 992,
         vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
         delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
         useragent = NULL)
 
 #Clases latentes año 2017
-proc_ohl_2017<-cbind(proc_ohl_2017, M1_1$predclass, M2_1$predclass, M5_1$predclass, M6_1$predclass, M8_1$predclass)
+proc_ohl_2017<-cbind(proc_ohl_2017, M1_1$predclass, M2_1$predclass, M5_1$predclass, M7_1$predclass, M8_1$predclass)
 
 sapply(proc_ohl_2017, class)
 proc_ohl_2017$`M1_1$predclass` <- as.factor(proc_ohl_2017$`M1_1$predclass`)
 proc_ohl_2017$`M2_1$predclass` <- as.factor(proc_ohl_2017$`M2_1$predclass`)
 proc_ohl_2017$`M5_1$predclass` <- as.factor(proc_ohl_2017$`M5_1$predclass`)
-proc_ohl_2017$`M6_1$predclass` <- as.factor(proc_ohl_2017$`M6_1$predclass`)
+proc_ohl_2017$`M7_1$predclass` <- as.factor(proc_ohl_2017$`M7_1$predclass`)
 proc_ohl_2017$`M8_1$predclass` <- as.factor(proc_ohl_2017$`M8_1$predclass`)
 
 freq(proc_ohl_2017$`M1_1$predclass`)
 freq(proc_ohl_2017$`M2_1$predclass`)
 freq(proc_ohl_2017$`M5_1$predclass`)
-freq(proc_ohl_2017$`M6_1$predclass`)
+freq(proc_ohl_2017$`M7_1$predclass`)
 freq(proc_ohl_2017$`M8_1$predclass`)
 
 ctable(proc_ohl_2017$tasa_sind_homb_2017, proc_ohl_2017$`M1_1$predclass`) #tasa sindicalización masculina
 ctable(proc_ohl_2017$tasa_sind_homb_2017, proc_ohl_2017$`M2_1$predclass`)
 ctable(proc_ohl_2017$tasa_sind_homb_2017, proc_ohl_2017$`M5_1$predclass`)
-ctable(proc_ohl_2017$tasa_sind_homb_2017, proc_ohl_2017$`M6_1$predclass`)
+ctable(proc_ohl_2017$tasa_sind_homb_2017, proc_ohl_2017$`M7_1$predclass`)
 ctable(proc_ohl_2017$tasa_sind_homb_2017, proc_ohl_2017$`M8_1$predclass`)
 
 ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M1_1$predclass`) #tasa sindicalización femenina
 ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M2_1$predclass`)
 ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M5_1$predclass`)
-ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M6_1$predclass`)
+ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M7_1$predclass`)
 ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M8_1$predclass`)
 
 ctable(proc_ohl_2017$sector, proc_ohl_2017$`M5_1$predclass`)
@@ -709,7 +709,7 @@ ctable(proc_ohl_2017$tactica, proc_ohl_2017$`M5_1$predclass`)
 tab_xtab(var.row = proc_ohl_2017$sector, proc_ohl_2017$`M5_1$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:22383/session/file52285caa2f5b.html", file = "output/tables/sector-predclass2017.png", vwidth = 992,
+webshot(url = "http://localhost:14019/session/file1d9458a81bea.html", file = "output/tables/sector-predclass2017.png", vwidth = 992,
         vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
         delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
         useragent = NULL)
@@ -717,54 +717,54 @@ webshot(url = "http://localhost:22383/session/file52285caa2f5b.html", file = "ou
 tab_xtab(var.row = proc_ohl_2017$tactica, proc_ohl_2017$`M5_1$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:22383/session/file52286b987ee9.html", file = "output/tables/tactica-predclass2017.png", vwidth = 992,
+webshot(url = "http://localhost:14019/session/file1d9464023efc.html", file = "output/tables/tactica-predclass2017.png", vwidth = 992,
         vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
         delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
         useragent = NULL)
 
 #Clases latentes año 2018
-proc_ohl_2018<-cbind(proc_ohl_2018, M1_2$predclass, M2_2$predclass, M4_2$predclass, M5_2$predclass, M6_2$predclass)
+proc_ohl_2018<-cbind(proc_ohl_2018, M1_2$predclass, M2_2$predclass, M3_2$predclass, M5_2$predclass, M6_2$predclass)
 
 sapply(proc_ohl_2018, class)
 proc_ohl_2018$`M1_2$predclass` <- as.factor(proc_ohl_2018$`M1_2$predclass`)
 proc_ohl_2018$`M2_2$predclass` <- as.factor(proc_ohl_2018$`M2_2$predclass`)
-proc_ohl_2018$`M4_2$predclass` <- as.factor(proc_ohl_2018$`M4_2$predclass`)
+proc_ohl_2018$`M3_2$predclass` <- as.factor(proc_ohl_2018$`M3_2$predclass`)
 proc_ohl_2018$`M5_2$predclass` <- as.factor(proc_ohl_2018$`M5_2$predclass`)
 proc_ohl_2018$`M6_2$predclass` <- as.factor(proc_ohl_2018$`M6_2$predclass`)
 
 freq(proc_ohl_2018$`M1_2$predclass`)
 freq(proc_ohl_2018$`M2_2$predclass`)
-freq(proc_ohl_2018$`M4_2$predclass`)
+freq(proc_ohl_2018$`M3_2$predclass`)
 freq(proc_ohl_2018$`M5_2$predclass`)
 freq(proc_ohl_2018$`M6_2$predclass`)
 
 ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M1_2$predclass`) #tasa sindicalización masculina
 ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M2_2$predclass`)
-ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M4_2$predclass`)
+ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M3_2$predclass`)
 ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M5_2$predclass`)
 ctable(proc_ohl_2018$tasa_sind_homb_2018, proc_ohl_2018$`M6_2$predclass`)
 
 ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M1_2$predclass`) #tasa sindicalización femenina
 ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M2_2$predclass`)
-ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M4_2$predclass`)
+ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M3_2$predclass`)
 ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M5_2$predclass`)
 ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M6_2$predclass`)
 
-ctable(proc_ohl_2018$sector, proc_ohl_2018$`M4_2$predclass`)
-ctable(proc_ohl_2018$tactica, proc_ohl_2018$`M4_2$predclass`)
+ctable(proc_ohl_2018$sector, proc_ohl_2018$`M3_2$predclass`)
+ctable(proc_ohl_2018$tactica, proc_ohl_2018$`M3_2$predclass`)
 
-tab_xtab(var.row = proc_ohl_2018$sector, proc_ohl_2018$`M4_2$predclass`,
+tab_xtab(var.row = proc_ohl_2018$sector, proc_ohl_2018$`M3_2$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:22383/session/file5228498e7576.html", file = "output/tables/sector-predclass2018.png", vwidth = 992,
+webshot(url = "http://localhost:14019/session/file1d9472b423dd.html", file = "output/tables/sector-predclass2018.png", vwidth = 992,
         vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
         delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
         useragent = NULL)
 
-tab_xtab(var.row = proc_ohl_2018$tactica, proc_ohl_2018$`M4_2$predclass`,
+tab_xtab(var.row = proc_ohl_2018$tactica, proc_ohl_2018$`M3_2$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:22383/session/file52284e1913de.html", file = "output/tables/tactica-predclass2018.png", vwidth = 992,
+webshot(url = "http://localhost:14019/session/file1d9470604966.html", file = "output/tables/tactica-predclass2018.png", vwidth = 992,
         vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
         delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
         useragent = NULL)
@@ -803,7 +803,7 @@ ctable(proc_ohl$tactica, proc_ohl$`M3_3$predclass`)
 tab_xtab(var.row = proc_ohl$sector, proc_ohl$`M3_3$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:22383/session/file52281b994d12.html", file = "output/tables/sector-predclassacum.png", vwidth = 992,
+webshot(url = "http://localhost:14019/session/file1d9466032b1f.html", file = "output/tables/sector-predclassacum.png", vwidth = 992,
         vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
         delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
         useragent = NULL)
