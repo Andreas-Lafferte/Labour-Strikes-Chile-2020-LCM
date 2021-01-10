@@ -3,7 +3,7 @@
 # ---- 1. Librerias -----
 pacman::p_load(dplyr, car, summarytools, ggplot2, magrittr, tidyverse, sjmisc, sjlabelled, 
                stargazer, sjPlot, devtools, ggmosaic, texreg, kableExtra, webshot, readxl,
-               openxlsx, psych, MASS, scatterplot3d, poLCA, reshape, writexl, readr, corrplot)
+               openxlsx, psych, MASS, scatterplot3d, poLCA, reshape, writexl, readr, corrplot, webshot)
 options(scipen=999) # valores sin notación científica
 
 # ---- 2. Datos ---- 
@@ -13,25 +13,85 @@ proc-ohl-2017 <- load("data/proc-ohl-2017.RData")
 proc-ohl-2018 <- load("data/proc-ohl-2018.RData")
 
 # ---- 3. Analisis descriptivo ---- 
+proc_ohl <- proc_ohl[-c(3,6)]
+proc_ohl_2016 <- proc_ohl_2016[-c(3,6)]
+proc_ohl_2017 <- proc_ohl_2017[-c(3,6)]
+proc_ohl_2018 <- proc_ohl_2018[-c(3,6)]
+
 print(summarytools::dfSummary(proc_ohl),  method="viewer")
 print(summarytools::dfSummary(proc_ohl_2016),  method="viewer")
 print(summarytools::dfSummary(proc_ohl_2017),  method="viewer")
 print(summarytools::dfSummary(proc_ohl_2018),  method="viewer")
 
+webshot(url = "http://localhost:22383/session/file522853c2722.html", file = "output/tables/summary-acum.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
 # ---- 4. Analisis bivariado ---- 
 tab_xtab(var.row = proc_ohl$rango_empresa_imp, proc_ohl$sector,
                show.cell.prc = T,show.summary = F, show.na = F)
-table(proc_ohl$rango_empresa_imp, proc_ohl$sector, useNA = "always") #poder estructural
+
+webshot(url = "http://localhost:22383/session/file522811b3136.html", file = "output/tables/rangoempresa-sector.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
+tab_xtab(var.row = proc_ohl$pibxtrab_acum, proc_ohl$sector,
+         show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file522851b32602.html", file = "output/tables/pibxtrab-sector.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
+tab_xtab(var.row = proc_ohl$organizacion, proc_ohl$sector,
+         show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file522827aa26f3.html", file = "output/tables/org-sector.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
+tab_xtab(var.row = proc_ohl$representatividad, proc_ohl$sector,
+         show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file5228555147d5.html", file = "output/tables/represent-sector.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
+tab_xtab(var.row = proc_ohl$tactica, proc_ohl$sector,
+         show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file52284ea42411.html", file = "output/tables/tactica-sector.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
 
 tab_xtab(var.row = proc_ohl$pibxtrab_acum, proc_ohl$rango_empresa_imp, 
          show.cell.prc = T,show.summary = F, show.na = F) #poder estructural
 
+webshot(url = "http://localhost:22383/session/file5228ef45522.html", file = "output/tables/structural-power.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
 tab_xtab(var.row = proc_ohl$organizacion, proc_ohl$representatividad, 
          show.cell.prc = T,show.summary = F, show.na = T) #poder asociativo
 
+webshot(url = "http://localhost:22383/session/file52282fbc19ce.html", file = "output/tables/associative-power.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
 tab_xtab(var.row = proc_ohl$tactica, proc_ohl$trab_comprometidos, 
-         show.cell.prc = T,show.summary = F, show.na = T)
-table(proc_ohl$tactica, proc_ohl$trab_comprometidos, useNA = "always") #poder de movilización
+         show.cell.prc = T,show.summary = F, show.na = T) #poder de movilización
+
+webshot(url = "http://localhost:22383/session/file5228171e6c2c.html", file = "output/tables/movilization-power.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
 
 # ---- 5. Matriz ---- 
 
@@ -52,6 +112,11 @@ rownames(cor01$rho) <- c("A. organización", "B. representatividad", "C. rango.e
 colnames(cor01$rho) <- c("(A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
 tab_corr(cor01$rho,
          triangle = "lower")
+
+webshot(url = "http://localhost:22383/session/file522832524b3.html", file = "output/tables/cor01.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
 
 ohl_2016 <- data.frame(x1,x2,x3,x4,x5,x6,x7,x8)
 
@@ -75,6 +140,11 @@ colnames(cor02$rho) <- c("(A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
 tab_corr(cor02$rho,
          triangle = "lower")
 
+webshot(url = "http://localhost:22383/session/file522820467ae8.html", file = "output/tables/cor02.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
 ohl_2017 <- data.frame(y1, y2, y3, y4, y5, y6, y7, y8)
 
 t <-cbind(y1, y2, y3, y4, y5, y6, y7, y8)~1
@@ -96,6 +166,11 @@ rownames(cor03$rho) <- c("A. organización", "B. representatividad", "C. rango.e
 colnames(cor03$rho) <- c("(A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
 tab_corr(cor03$rho,
          triangle = "lower")
+
+webshot(url = "http://localhost:22383/session/file5228cb4786a.html", file = "output/tables/cor03.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
 
 ohl_2018 <- data.frame(z1, z2, z3, z4, z5, z6, z7, z8)
 
@@ -578,8 +653,22 @@ ctable(proc_ohl_2016$tasa_sind_muj_2016, proc_ohl_2016$`M8$predclass`)
 
 ctable(proc_ohl_2016$sector, proc_ohl_2016$`M4$predclass`)
 ctable(proc_ohl_2016$tactica, proc_ohl_2016$`M4$predclass`)
+
 tab_xtab(var.row = proc_ohl_2016$sector, proc_ohl_2016$`M4$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file5228419e6dcf.html", file = "output/tables/sector-predclass2016.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
+tab_xtab(var.row = proc_ohl_2016$tactica, proc_ohl_2016$`M4$predclass`,
+         show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file522877f5935.html", file = "output/tables/tactica-predclass2016.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
 
 #Clases latentes año 2017
 proc_ohl_2017<-cbind(proc_ohl_2017, M1_1$predclass, M2_1$predclass, M5_1$predclass, M6_1$predclass, M8_1$predclass)
@@ -611,8 +700,22 @@ ctable(proc_ohl_2017$tasa_sind_muj_2017, proc_ohl_2017$`M8_1$predclass`)
 
 ctable(proc_ohl_2017$sector, proc_ohl_2017$`M5_1$predclass`)
 ctable(proc_ohl_2017$tactica, proc_ohl_2017$`M5_1$predclass`)
+
 tab_xtab(var.row = proc_ohl_2017$sector, proc_ohl_2017$`M5_1$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file52285caa2f5b.html", file = "output/tables/sector-predclass2017.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
+tab_xtab(var.row = proc_ohl_2017$tactica, proc_ohl_2017$`M5_1$predclass`,
+         show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file52286b987ee9.html", file = "output/tables/tactica-predclass2017.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
 
 #Clases latentes año 2018
 proc_ohl_2018<-cbind(proc_ohl_2018, M1_2$predclass, M2_2$predclass, M4_2$predclass, M5_2$predclass, M6_2$predclass)
@@ -644,8 +747,22 @@ ctable(proc_ohl_2018$tasa_sind_muj_2018, proc_ohl_2018$`M6_2$predclass`)
 
 ctable(proc_ohl_2018$sector, proc_ohl_2018$`M4_2$predclass`)
 ctable(proc_ohl_2018$tactica, proc_ohl_2018$`M4_2$predclass`)
+
 tab_xtab(var.row = proc_ohl_2018$sector, proc_ohl_2018$`M4_2$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file5228498e7576.html", file = "output/tables/sector-predclass2018.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
+tab_xtab(var.row = proc_ohl_2018$tactica, proc_ohl_2018$`M4_2$predclass`,
+         show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file52284e1913de.html", file = "output/tables/tactica-predclass2018.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
 
 #Clases latentes acumulado
 proc_ohl<-cbind(proc_ohl, M1_3$predclass, M2_3$predclass, M3_3$predclass, M5_3$predclass, M6_3$predclass)
@@ -677,11 +794,25 @@ ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M6_3$predclass`)
 
 ctable(proc_ohl$sector, proc_ohl$`M3_3$predclass`)
 ctable(proc_ohl$tactica, proc_ohl$`M3_3$predclass`)
+
 tab_xtab(var.row = proc_ohl$sector, proc_ohl$`M3_3$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file52281b994d12.html", file = "output/tables/sector-predclassacum.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
+tab_xtab(var.row = proc_ohl$tactica, proc_ohl$`M3_3$predclass`,
+         show.cell.prc = T,show.summary = F, show.na = F)
+
+webshot(url = "http://localhost:22383/session/file52288e51060.html", file = "output/tables/tactica-predclassacum.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
 # ---- 8. Export ----
 write_xlsx(AjusteM_2016,"output/ajuste2016.xlsx", col_names = TRUE,format_headers = TRUE)
 write_xlsx(AjusteM_2017,"output/ajuste2017.xlsx", col_names = TRUE,format_headers = TRUE)
 write_xlsx(AjusteM_2018,"output/ajuste2018.xlsx", col_names = TRUE,format_headers = TRUE)
 write_xlsx(AjusteM_acum,"output/ajusteacum.xlsx", col_names = TRUE,format_headers = TRUE)
-
