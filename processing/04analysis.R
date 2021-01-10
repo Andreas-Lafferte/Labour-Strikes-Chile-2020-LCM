@@ -194,6 +194,11 @@ colnames(cor04$rho) <- c(" (A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)"
 tab_corr(cor04$rho,
          triangle = "lower")
 
+webshot(url = "http://localhost:13515/session/file2d3059233930.html", file = "output/tables/cor04.png", vwidth = 992,
+        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
+        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
+        useragent = NULL)
+
 ohl_acum <- data.frame(a1, a2, a3, a4, a5, a6, a7, a8)
 
 k <-cbind(a1, a2, a3, a4, a5, a6, a7, a8)~1
