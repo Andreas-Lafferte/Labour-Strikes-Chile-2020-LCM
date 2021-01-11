@@ -800,10 +800,10 @@ ctable(proc_ohl$tasa_sind_muj_acum, proc_ohl$`M6_3$predclass`)
 ctable(proc_ohl$sector, proc_ohl$`M3_3$predclass`)
 ctable(proc_ohl$tactica, proc_ohl$`M3_3$predclass`)
 
-tab_xtab(var.row = proc_ohl$sector, proc_ohl$`M3_3$predclass`,
+tab_xtab(var.row = proc_ohl$`M3_3$predclass`,proc_ohl$sector,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:14019/session/file1d9466032b1f.html", file = "output/tables/sector-predclassacum.png", vwidth = 992,
+webshot(url = "http://localhost:20377/session/file3be0e372ab6.html", file = "output/tables/sector-predclassacum.png", vwidth = 992,
         vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
         delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
         useragent = NULL)
