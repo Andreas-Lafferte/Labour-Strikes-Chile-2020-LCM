@@ -40,34 +40,14 @@ webshot(url = "http://localhost:22383/session/file522811b3136.html", file = "out
 tab_xtab(var.row = proc_ohl$pibxtrab_acum, proc_ohl$sector,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:22383/session/file522851b32602.html", file = "output/tables/pibxtrab-sector.png", vwidth = 992,
-        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
-        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
-        useragent = NULL)
-
 tab_xtab(var.row = proc_ohl$organizacion, proc_ohl$sector,
          show.cell.prc = T,show.summary = F, show.na = F)
-
-webshot(url = "http://localhost:22383/session/file522827aa26f3.html", file = "output/tables/org-sector.png", vwidth = 992,
-        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
-        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
-        useragent = NULL)
 
 tab_xtab(var.row = proc_ohl$representatividad, proc_ohl$sector,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:22383/session/file5228555147d5.html", file = "output/tables/represent-sector.png", vwidth = 992,
-        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
-        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
-        useragent = NULL)
-
 tab_xtab(var.row = proc_ohl$tactica, proc_ohl$sector,
          show.cell.prc = T,show.summary = F, show.na = F)
-
-webshot(url = "http://localhost:22383/session/file52284ea42411.html", file = "output/tables/tactica-sector.png", vwidth = 992,
-        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
-        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
-        useragent = NULL)
 
 tab_xtab(var.row = proc_ohl$pibxtrab_acum, proc_ohl$rango_empresa_imp, 
          show.cell.prc = T,show.summary = F, show.na = F) #poder estructural
@@ -113,11 +93,6 @@ colnames(cor01$rho) <- c("(A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
 tab_corr(cor01$rho,
          triangle = "lower")
 
-webshot(url = "http://localhost:22383/session/file522832524b3.html", file = "output/tables/cor01.png", vwidth = 992,
-        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
-        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
-        useragent = NULL)
-
 ohl_2016 <- data.frame(x1,x2,x3,x4,x5,x6,x7,x8)
 
 f <-cbind(x1, x2, x3, x4, x5, x6, x7, x8)~1
@@ -139,11 +114,6 @@ rownames(cor02$rho) <- c("A. organización", "B. representatividad", "C. rango.e
 colnames(cor02$rho) <- c("(A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
 tab_corr(cor02$rho,
          triangle = "lower")
-
-webshot(url = "http://localhost:22383/session/file522820467ae8.html", file = "output/tables/cor02.png", vwidth = 992,
-        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
-        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
-        useragent = NULL)
 
 ohl_2017 <- data.frame(y1, y2, y3, y4, y5, y6, y7, y8)
 
@@ -167,11 +137,6 @@ colnames(cor03$rho) <- c("(A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
 tab_corr(cor03$rho,
          triangle = "lower")
 
-webshot(url = "http://localhost:22383/session/file5228cb4786a.html", file = "output/tables/cor03.png", vwidth = 992,
-        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
-        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
-        useragent = NULL)
-
 ohl_2018 <- data.frame(z1, z2, z3, z4, z5, z6, z7, z8)
 
 r <-cbind(z1, z2, z3, z4, z5, z6, z7, z8)~1
@@ -193,11 +158,6 @@ rownames(cor04$rho) <- c("A. organización", "B. representatividad", "C. rango.e
 colnames(cor04$rho) <- c(" (A)", "(B)", "(C)", "(D)", "(E)", "(F)", "(G)", "(H)")
 tab_corr(cor04$rho,
          triangle = "lower")
-
-webshot(url = "http://localhost:13515/session/file2d3059233930.html", file = "output/tables/cor04.png", vwidth = 992,
-        vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
-        delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
-        useragent = NULL)
 
 ohl_acum <- data.frame(a1, a2, a3, a4, a5, a6, a7, a8)
 
