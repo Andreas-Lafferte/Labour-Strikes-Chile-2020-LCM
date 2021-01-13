@@ -771,7 +771,7 @@ webshot(url = "http://localhost:20377/session/file3be0e372ab6.html", file = "out
 tab_xtab(var.row = proc_ohl$tactica, proc_ohl$`M3_3$predclass`,
          show.cell.prc = T,show.summary = F, show.na = F)
 
-webshot(url = "http://localhost:22383/session/file52288e51060.html", file = "output/tables/tactica-predclassacum.png", vwidth = 992,
+webshot(url = "http://localhost:31946/session/file11484eb05b91.html", file = "output/tables/tactica-predclassacum.png", vwidth = 992,
         vheight = 744, cliprect = NULL, selector = NULL, expand = NULL,
         delay = 0.2, zoom = 1, eval = NULL, debug = FALSE,
         useragent = NULL)
